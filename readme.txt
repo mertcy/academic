@@ -6,16 +6,21 @@ Strings --> $sVariable
 Integers--> $iVariable
 Arrays  --> $aVariable
      .		    .
-     .              .	
+     .          .	
 
-
+--------------------------------------------------------------------------------------------------------------------
 Create your files in the directory that relevant. 
-Ex: create student.php in src->front-end
+-Ex: create student.php in src/front-end
+Use style files for relevant pages.
+-Ex: create student.css file in src/css directory for student.php and write your <style>XXX</style> codes in there.
 
+Write your codes simple and understandable and use indentation. Atom-beautify can be used.
+--------------------------------------------------------------------------------------------------------------------
 
 --- COMMITTING ---
 
-DO NOT commit like: 'git add . '
+DO NOT commit like: 'git add .'
+You SHOULD use like: 'git add src/front-end/login.php src/css/login.css'
 
 Follow these; 
 
