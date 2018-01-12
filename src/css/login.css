@@ -1,0 +1,7 @@
+body {}
+div.container {
+  position: absolute;
+  width: 60%;
+  left: 35%;
+  top: 35%;
+}
