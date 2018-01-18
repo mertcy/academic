@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>Academic Ogrenci Sayfasi</title>
+        <title>Academic Ogretmen Sayfasi</title>
 
         <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -16,34 +16,36 @@
 
     </head>
     <body>
-
         <div class="wrapper">
             <!-- Sidebar Holder -->
             <nav id="sidebar">
                 <div class="sidebar-header">
                     <h3>AcadeMic</h3>
                 </div>
-
                 <ul class="list-unstyled components">
-                    <p>Ogrenci Anasayfa</p>
+                  <p>Ogretmen Anasayfa</p>
+                  <li>
+                      <a href="#">Duyurular</a>
+                  </li>
                     <li class="active">
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Derslerim</a>
-                        <ul class="collapse list-unstyled" id="homeSubmenu">
-                            <li><a href="#">Matematik</a></li>
-                            <li><a href="#">Turkce</a></li>
-                            <li><a href="#">Fen Bilgisi</a></li>
+                        <a href="#classesMenu" data-toggle="collapse" aria-expanded="false">Siniflarim</a>
+                        <ul class="collapse list-unstyled" id="classesMenu">
+                            <li><a href="#">5-A</a></li>
+                            <li><a href="#">5-B</a></li>
+                            <li><a href="#">6-C</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Ders Programim</a>
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Etkinliklerim</a>
-                        <ul class="collapse list-unstyled" id="pageSubmenu">
-                            <li><a href="#">Gezilerim</a></li>
-                            <li><a href="#">Kuluplerim</a></li>
-                        </ul>
+                        <a href="#">Odevler</a>
                     </li>
                     <li>
-                        <a href="#">Not Dokumum</a>
+                        <a href="#">Quizler</a>
+                    </li>
+                    <li>
+                        <a href="#">Notlar</a>
+                    </li>
+                    <li>
+                        <a href="#">Toplantilar</a>
                     </li>
                 </ul>
 
@@ -89,7 +91,6 @@
                 <p> Icerik4</p>
               </div>
         </div>
-
 
         <!-- jQuery CDN -->
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>

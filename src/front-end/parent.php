@@ -4,9 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-        <title>Academic Ogrenci Sayfasi</title>
-
+        <title>Academic Veli Sayfasi</title>
         <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!-- Our Custom CSS -->
@@ -25,28 +23,26 @@
                 </div>
 
                 <ul class="list-unstyled components">
-                    <p>Ogrenci Anasayfa</p>
-                    <li class="active">
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Derslerim</a>
-                        <ul class="collapse list-unstyled" id="homeSubmenu">
-                            <li><a href="#">Matematik</a></li>
-                            <li><a href="#">Turkce</a></li>
-                            <li><a href="#">Fen Bilgisi</a></li>
-                        </ul>
+                    <p>Veli Anasayfa</p>
+                    <li>
+                        <a href="#">Duyurular</a>
                     </li>
                     <li>
-                        <a href="#">Ders Programim</a>
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Etkinliklerim</a>
-                        <ul class="collapse list-unstyled" id="pageSubmenu">
-                            <li><a href="#">Gezilerim</a></li>
-                            <li><a href="#">Kuluplerim</a></li>
-                        </ul>
+                        <a href="#">Toplanti</a>
                     </li>
                     <li>
-                        <a href="#">Not Dokumum</a>
+                        <a href="#">Gezi Onay</a>
+                    </li>
+                    <li>
+                        <a href="#">Not Dokumu</a>
+                    </li>
+                    <li>
+                        <a href="#">Ders Programi</a>
+                    </li>
+                    <li>
+                        <a href="#">Iletisim</a>
                     </li>
                 </ul>
-
             </nav>
 
             <!-- Page Content Holder -->
@@ -89,7 +85,6 @@
                 <p> Icerik4</p>
               </div>
         </div>
-
 
         <!-- jQuery CDN -->
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
