@@ -37,13 +37,13 @@
                   echo "<script type='text/javascript'>alert('$kisi_adi $kisi_soyadi olarak sisteme giriş yapılmıştır.');</script>";
 
                   if($userType == 0) { // opens student's page
-                      header('Refresh: 1; URL = ogrenci.php');
+                      header('Refresh: 1; URL = student.php');
                       exit;
                   } elseif ($userType == 1) { // opens parent's page
-                      header('Refresh: 1; URL = veli.php');
+                      header('Refresh: 1; URL = parent.php');
                       exit;
                   } elseif ($userType == 2) { // opens teacher's page
-                      header('Refresh: 1; URL = ogretmen.php');
+                      header('Refresh: 1; URL = teacher.php');
                       exit;
                   }
               }
