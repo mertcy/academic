@@ -26,6 +26,9 @@
 
                 <ul class="list-unstyled components">
                     <p>Ogrenci Anasayfa</p>
+                    <li>
+                        <a href="#">Duyurular</a>
+                    </li>
                     <li class="active">
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Derslerim</a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
