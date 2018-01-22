@@ -32,9 +32,27 @@
                     <li class="active">
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Derslerim</a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
-                            <li><a href="#">Matematik</a></li>
-                            <li><a href="#">Turkce</a></li>
-                            <li><a href="#">Fen Bilgisi</a></li>
+                            <?php
+                              session_start(); // start the session
+                              $current_ogrenciId = $_SESSION['user_id'];
+                              $connection = mysqli_connect('localhost','root','root','db_academic','8889','/Applications/MAMP/tmp/mysql/mysql.sock');
+
+                              if($connection) {
+                                  $sql_log = "SELECT o.ogrenci_id, o.sinif_id, o.sube_id, dp.ders_programId, dp.sinif_id, dp.sube_id,
+                                                     d.ders_id, d.ders_adi
+                                              FROM Ogrenci AS o, Ders_Programi AS dp, Ders AS d
+                                              WHERE o.ogrenci_id = $current_ogrenciId AND d.ders_id = dp.ders_programId
+                                              AND   o.sinif_id = dp.sinif_id AND  o.sube_id = dp.sube_id";
+                                  $result = mysqli_query($connection, $sql_log);
+
+                                  while($row_log = mysqli_fetch_row($result)) {
+                                      $ders_adi = $row_log[7];
+                                      ?>
+                                      <li><a href="#"><?php echo $ders_adi; ?></a></li>
+                                      <?php
+                                  }
+                              }
+                          ?>
                         </ul>
                     </li>
                     <li>
