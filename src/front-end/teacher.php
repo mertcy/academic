@@ -15,6 +15,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
     </head>
+    <?php
+        session_start(); // start the session
+        $current_OgretmenId = $_SESSION['user_id'];
+    ?>
     <body>
         <div class="wrapper">
             <!-- Sidebar Holder -->
@@ -27,16 +31,26 @@
                   <li>
                       <a href="#">Duyurular</a>
                   </li>
-                    <li class="active">
-                        <a href="#classesMenu" data-toggle="collapse" aria-expanded="false">Siniflarim</a>
-                        <ul class="collapse list-unstyled" id="classesMenu">
-                            <li><a href="#">5-A</a></li>
-                            <li><a href="#">5-B</a></li>
-                            <li><a href="#">6-C</a></li>
-                        </ul>
-                    </li>
                     <li>
-                        <a href="#">Odevler</a>
+                        <a href="#" onclick="showHomeworkField(<?php echo $current_OgretmenId; ?>)">Odevler</a>
+                        <script>
+                        function showHomeworkField(ogretmen_url) {
+
+                          if (window.XMLHttpRequest) {
+                            // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                          } else { // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                          }
+                          xmlhttp.onreadystatechange=function() {
+                            if (this.readyState==4 && this.status==200) {
+                              document.getElementById("homeworkField").innerHTML=this.responseText;
+                            }
+                          }
+                          xmlhttp.open("GET","teacher_homework.php?q="+ogretmen_url,true);
+                          xmlhttp.send();
+                        }
+                        </script>
                     </li>
                     <li>
                         <a href="#">Quizler</a>
@@ -46,6 +60,9 @@
                     </li>
                     <li>
                         <a href="#">Toplantilar</a>
+                    </li>
+                    <li>
+                        <a href="#">Geziler</a>
                     </li>
                 </ul>
 
@@ -74,21 +91,7 @@
                         </div>
                     </div>
                 </nav>
-
-                <h2>Baslik</h2>
-                <p> Icerik </p>
-                <div class="line"></div>
-
-                <h2>Baslik2</h2>
-                <p> Icerik2</p>
-                <div class="line"></div>
-
-                <h2>Baslik3</h2>
-                <p> Icerik3 </p>
-                <div class="line"></div>
-
-                <h3>Baslik4</h3>
-                <p> Icerik4</p>
+                <div id="homeworkField"><b></b></div>
               </div>
         </div>
 
