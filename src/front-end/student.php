@@ -15,6 +15,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
     </head>
+    <?php
+        session_start(); // start the session
+        $current_ogrenciId = $_SESSION['user_id'];
+    ?>
     <body>
 
         <div class="wrapper">
@@ -27,14 +31,30 @@
                 <ul class="list-unstyled components">
                     <p>Ogrenci Anasayfa</p>
                     <li>
-                        <a href="#">Duyurular</a>
+                        <a href="#" onclick="showAnnouncements(<?php echo $current_ogrenciId; ?>)">Duyurular</a>
+                        <script>
+                        function showAnnouncements(ogrenci_url) {
+
+                          if (window.XMLHttpRequest) {
+                            // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                          } else { // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                          }
+                          xmlhttp.onreadystatechange=function() {
+                            if (this.readyState==4 && this.status==200) {
+                              document.getElementById("announcements").innerHTML=this.responseText;
+                            }
+                          }
+                          xmlhttp.open("GET","student_announcement.php?q="+ogrenci_url,true);
+                          xmlhttp.send();
+                        }
+                        </script>
                     </li>
                     <li class="active">
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Derslerim</a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
                             <?php
-                              session_start(); // start the session
-                              $current_ogrenciId = $_SESSION['user_id'];
                               $connection = mysqli_connect('localhost','root','root','db_academic','8889','/Applications/MAMP/tmp/mysql/mysql.sock');
 
                               if($connection) {
@@ -94,20 +114,8 @@
                     </div>
                 </nav>
 
-                <h2>Baslik</h2>
-                <p> Icerik </p>
-                <div class="line"></div>
+                <div id="announcements"><b></b></div> // announcements related to students will be listed here
 
-                <h2>Baslik2</h2>
-                <p> Icerik2</p>
-                <div class="line"></div>
-
-                <h2>Baslik3</h2>
-                <p> Icerik3 </p>
-                <div class="line"></div>
-
-                <h3>Baslik4</h3>
-                <p> Icerik4</p>
               </div>
         </div>
 
