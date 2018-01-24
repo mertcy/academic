@@ -76,7 +76,29 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Ders Programim</a>
+                      <a href="#DersProg" onclick="showClassSchedule(<?php echo $current_ogrenciId; ?>)">Ders Programim</a>
+                      <script>
+                      function showClassSchedule(ogrenci_url) {
+
+                        if (window.XMLHttpRequest) {
+                          // code for IE7+, Firefox, Chrome, Opera, Safari
+                          xmlhttp=new XMLHttpRequest();
+                        } else { // code for IE6, IE5
+                          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.onreadystatechange=function() {
+                          if (this.readyState==4 && this.status==200) {
+                            document.getElementById("announcements").innerHTML=this.responseText;
+                          }
+                        }
+                        xmlhttp.open("GET","student_classSchedule.php?q="+ogrenci_url,true);
+                        xmlhttp.send();
+                      }
+                      </script>
+
+
+
+
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Etkinliklerim</a>
                         <ul class="collapse list-unstyled" id="pageSubmenu">
                             <li><a href="#">Gezilerim</a></li>
