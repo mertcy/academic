@@ -114,7 +114,8 @@
                     </div>
                 </nav>
 
-                <div id="announcements"><b></b></div> // announcements related to students will be listed here
+                <div id="announcements"><b><?php INCLUDE('student_announcement.php'); ?></b></div>
+                <!-- announcements related to students will be listed here -->
 
               </div>
         </div>
