@@ -5,7 +5,7 @@
   {
     header("location:login.php");
   }
-  
+
   $current_parentID = $_SESSION['user_id'];
 
   $connection = mysqli_connect('localhost','root','root','db_academic','8889','/Applications/MAMP/tmp/mysql/mysql.sock');
@@ -58,7 +58,25 @@
                         <a href="#">Not Dokumu</a>
                     </li>
                     <li>
-                        <a href="#">Ders Programi</a>
+                      <a href="#DersProg" onclick="showClassSchedule(<?php echo $current_ogrenciId; ?>)">Ders Programi</a>
+                      <script>
+                      function showClassSchedule(ogrenci_url) {
+
+                        if (window.XMLHttpRequest) {
+                          // code for IE7+, Firefox, Chrome, Opera, Safari
+                          xmlhttp=new XMLHttpRequest();
+                        } else { // code for IE6, IE5
+                          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.onreadystatechange=function() {
+                          if (this.readyState==4 && this.status==200) {
+                            document.getElementById("include").innerHTML=this.responseText;
+                          }
+                        }
+                        xmlhttp.open("GET","parent_classSchedule.php?q="+ogrenci_url,true);
+                        xmlhttp.send();
+                      }
+                      </script>
                     </li>
                     <li>
                         <a href="#">Iletisim</a>
@@ -89,20 +107,8 @@
                     </div>
                 </nav>
 
-                <h2>Baslik</h2>
-                <p> Icerik </p>
-                <div class="line"></div>
+                   <div id="include"></div>
 
-                <h2>Baslik2</h2>
-                <p> Icerik2</p>
-                <div class="line"></div>
-
-                <h2>Baslik3</h2>
-                <p> Icerik3 </p>
-                <div class="line"></div>
-
-                <h3>Baslik4</h3>
-                <p> Icerik4</p>
               </div>
         </div>
 
