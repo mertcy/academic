@@ -17,7 +17,22 @@
     </head>
     <?php
         session_start(); // start the session
+        if($_SESSION['status']!="Active")
+        {
+          header("location:login.php");
+        }
         $current_OgretmenId = $_SESSION['user_id'];
+
+        $connection = mysqli_connect('localhost','root','root','db_academic','8889','/Applications/MAMP/tmp/mysql/mysql.sock');
+        if($connection){
+          $sql_log = "SELECT o.ogretmen_id, k.kisi_adi, k.kisi_soyadi FROM Ogretmen AS o, Kisi AS k
+          WHERE o.ogretmen_id = $current_OgretmenId AND kisi_id = $current_OgretmenId";
+          $result = mysqli_query($connection, $sql_log);
+          while($row_log = mysqli_fetch_row($result)) {
+              $ogretmen_adi = $row_log[1];
+              $ogretmen_soyadi = $row_log[2];
+          }
+        }      
     ?>
     <body>
         <div class="wrapper">
@@ -83,10 +98,9 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#">Page</a></li>
-                                <li><a href="#">Page</a></li>
-                                <li><a href="#">Page</a></li>
-                                <li><a href="#">Page</a></li>
+                              <li><a href="#"><?php echo $ogretmen_adi." ".$ogretmen_soyadi; ?></a></li>
+                              <li><a href="#"><?php echo "Sifremi degistir"; ?></a></li>
+                              <li><a href="logout.php"><?php echo "Guvenli cikis"; ?></a></li>
                             </ul>
                         </div>
                     </div>
