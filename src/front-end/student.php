@@ -17,6 +17,12 @@
     </head>
     <?php
         session_start(); // start the session
+
+        if($_SESSION['status']!="Active")
+        {
+          header("location:login.php");
+        }
+
         $current_ogrenciId = $_SESSION['user_id'];
     ?>
     <body>
@@ -59,14 +65,16 @@
 
                               if($connection) {
                                   $sql_log = "SELECT o.ogrenci_id, o.sinif_id, o.sube_id, dp.ders_programId, dp.sinif_id, dp.sube_id,
-                                                     d.ders_id, d.ders_adi
-                                              FROM Ogrenci AS o, Ders_Programi AS dp, Ders AS d
+                                                     d.ders_id, d.ders_adi, k.kisi_adi, k.kisi_soyadi
+                                              FROM Ogrenci AS o, Ders_Programi AS dp, Ders AS d, Kisi AS k
                                               WHERE o.ogrenci_id = $current_ogrenciId AND d.ders_id = dp.ders_programId
-                                              AND   o.sinif_id = dp.sinif_id AND  o.sube_id = dp.sube_id";
+                                              AND   o.sinif_id = dp.sinif_id AND  o.sube_id = dp.sube_id AND kisi_id = $current_ogrenciId ";
                                   $result = mysqli_query($connection, $sql_log);
 
                                   while($row_log = mysqli_fetch_row($result)) {
                                       $ders_adi = $row_log[7];
+                                      $ogrenci_adi = $row_log[8];
+                                      $ogrenci_soyadi = $row_log[9];
                                       ?>
                                       <li><a href="#"><?php echo $ders_adi; ?></a></li>
                                       <?php
@@ -127,10 +135,9 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#">Page</a></li>
-                                <li><a href="#">Page</a></li>
-                                <li><a href="#">Page</a></li>
-                                <li><a href="#">Page</a></li>
+                              <li><a href="#"><?php echo $ogrenci_adi." ".$ogrenci_soyadi; ?></a></li>
+                              <li><a href="#"><?php echo "Sifremi degistir"; ?></a></li>
+                              <li><a href="logout.php"><?php echo "Guvenli cikis"; ?></a></li>
                             </ul>
                         </div>
                     </div>
