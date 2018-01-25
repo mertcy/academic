@@ -1,3 +1,24 @@
+<?php
+  session_start(); // start the session
+
+  if($_SESSION['status']!="Active")
+  {
+    header("location:login.php");
+  }
+  
+  $current_parentID = $_SESSION['user_id'];
+
+  $connection = mysqli_connect('localhost','root','root','db_academic','8889','/Applications/MAMP/tmp/mysql/mysql.sock');
+  if($connection){
+    $sql_log = "SELECT p.veli_id, k.kisi_adi, k.kisi_soyadi FROM Veli AS p, Kisi AS k
+    WHERE p.veli_id = $current_parentID AND kisi_id = $current_parentID";
+    $result = mysqli_query($connection, $sql_log);
+    while($row_log = mysqli_fetch_row($result)) {
+        $veli_adi = $row_log[1];
+        $veli_soyadi = $row_log[2];
+    }
+  }
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -60,10 +81,9 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#">Page</a></li>
-                                <li><a href="#">Page</a></li>
-                                <li><a href="#">Page</a></li>
-                                <li><a href="#">Page</a></li>
+                                <li><a href="#"><?php echo $veli_adi." ".$veli_soyadi; ?></a></li>
+                                <li><a href="#"><?php echo "Sifremi degistir"; ?></a></li>
+                                <li><a href="logout.php"><?php echo "Guvenli cikis"; ?></a></li>
                             </ul>
                         </div>
                     </div>

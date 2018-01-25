@@ -19,6 +19,8 @@ INSERT INTO Ogrenci VALUES (4, 7, 'B');
 
 INSERT INTO Ogretmen VALUES (3);
 
+INSERT INTO Veli VALUES (2,4);
+
 INSERT INTO Ders_Programi VALUES (1, 7, 'B', 1, 'null', 1723);
 INSERT INTO Ders_Programi VALUES (2, 7, 'B', 1, 'null', 1723);
 
