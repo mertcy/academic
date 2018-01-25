@@ -32,7 +32,7 @@
               $ogretmen_adi = $row_log[1];
               $ogretmen_soyadi = $row_log[2];
           }
-        }      
+        }
     ?>
     <body>
         <div class="wrapper">
@@ -85,7 +85,6 @@
 
             <!-- Page Content Holder -->
             <div id="content">
-
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
 
@@ -105,7 +104,7 @@
                         </div>
                     </div>
                 </nav>
-                <div id="homeworkField"><b></b></div>
+                <div id="homeworkField"></div>
               </div>
         </div>
 
