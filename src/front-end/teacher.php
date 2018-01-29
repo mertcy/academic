@@ -17,21 +17,20 @@
     </head>
     <?php
         session_start(); // start the session
-        if($_SESSION['status']!="Active")
-        {
-          header("location:login.php");
+        if ($_SESSION['status']!="Active") {
+            header("location:login.php");
         }
         $current_OgretmenId = $_SESSION['user_id'];
 
-        $connection = mysqli_connect('localhost','root','root','db_academic','8889','/Applications/MAMP/tmp/mysql/mysql.sock');
-        if($connection){
-          $sql_log = "SELECT o.ogretmen_id, k.kisi_adi, k.kisi_soyadi FROM Ogretmen AS o, Kisi AS k
+        $connection = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+        if ($connection) {
+            $sql_log = "SELECT o.ogretmen_id, k.kisi_adi, k.kisi_soyadi FROM Ogretmen AS o, Kisi AS k
           WHERE o.ogretmen_id = $current_OgretmenId AND kisi_id = $current_OgretmenId";
-          $result = mysqli_query($connection, $sql_log);
-          while($row_log = mysqli_fetch_row($result)) {
-              $ogretmen_adi = $row_log[1];
-              $ogretmen_soyadi = $row_log[2];
-          }
+            $result = mysqli_query($connection, $sql_log);
+            while ($row_log = mysqli_fetch_row($result)) {
+                $ogretmen_adi = $row_log[1];
+                $ogretmen_soyadi = $row_log[2];
+            }
         }
     ?>
     <body>
@@ -47,7 +46,7 @@
                       <a href="#">Duyurular</a>
                   </li>
                     <li>
-                        <a href="#" onclick="showHomeworkField(<?php echo $current_OgretmenId; ?>)">Odevler</a>
+                        <a href="#Homework" onclick="showHomeworkField(<?php echo $current_OgretmenId; ?>)">Odevler</a>
                         <script>
                         function showHomeworkField(ogretmen_url) {
 
@@ -59,7 +58,7 @@
                           }
                           xmlhttp.onreadystatechange=function() {
                             if (this.readyState==4 && this.status==200) {
-                              document.getElementById("homeworkField").innerHTML=this.responseText;
+                              document.getElementById("teacherContent").innerHTML=this.responseText;
                             }
                           }
                           xmlhttp.open("GET","teacher_homework.php?q="+ogretmen_url,true);
@@ -68,7 +67,24 @@
                         </script>
                     </li>
                     <li>
-                        <a href="#">Quizler</a>
+                        <a href="#Quiz" onclick="showQuizField(<?php echo $current_OgretmenId; ?>)">Quizler</a>
+                        <script>
+                        function showQuizField(ogretmen_url) {
+                          if (window.XMLHttpRequest) {
+                            // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                          } else { // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                          }
+                          xmlhttp.onreadystatechange=function() {
+                            if (this.readyState==4 && this.status==200) {
+                              document.getElementById("teacherContent").innerHTML=this.responseText;
+                            }
+                          }
+                          xmlhttp.open("GET","teacher_quiz.php?q="+ogretmen_url,true);
+                          xmlhttp.send();
+                        }
+                        </script>
                     </li>
                     <li>
                         <a href="#">Notlar</a>
@@ -104,7 +120,7 @@
                         </div>
                     </div>
                 </nav>
-                <div id="homeworkField"></div>
+                <div id="teacherContent"></div>
               </div>
         </div>
 
