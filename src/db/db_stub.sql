@@ -30,3 +30,28 @@ INSERT INTO Ders_Programi VALUES (5, 6, 'C', 1, 'null', 1723);
 
 INSERT INTO Sinif VALUES (6, 'C', 3);
 INSERT INTO Sinif VALUES (7, 'B', 3);
+
+
+INSERT INTO Sinif_Ders_Programi VALUES (7, 'B', 1);
+INSERT INTO Sinif_Ders_Programi VALUES (7, 'B', 2);
+INSERT INTO Sinif_Ders_Programi VALUES (7, 'B', 3);
+INSERT INTO Sinif_Ders_Programi VALUES (7, 'B', 4);
+INSERT INTO Sinif_Ders_Programi VALUES (7, 'B', 5);
+INSERT INTO Sinif_Ders_Programi VALUES (6, 'C', 1);
+INSERT INTO Sinif_Ders_Programi VALUES (6, 'C', 2);
+INSERT INTO Sinif_Ders_Programi VALUES (6, 'C', 3);
+INSERT INTO Sinif_Ders_Programi VALUES (6, 'C', 4);
+INSERT INTO Sinif_Ders_Programi VALUES (6, 'C', 5);
+
+
+INSERT INTO Duyuru VALUES (100000, 1, 6, 'C', 0, 1, 'Sinav tarihleri aciklandi', 'Ilk sinaviniz Ocakin son gunu', 2018-01-30);
+
+INSERT INTO Duyuru (ders_id, sinif_id, sube_id, ilgili, duyuru_tipi, duyuru_basligi, duyuru_icerigi, duyuru_tarihi) VALUES (1, 6, 'C', 0, 0, 'Somestr', 'Yeni donem basladi', 2018-01-31);
+
+INSERT INTO Duyuru (ders_id, sinif_id, sube_id, ilgili, duyuru_tipi, duyuru_basligi, duyuru_icerigi, duyuru_tarihi) VALUES (1, 6, 'C', 0, 2, 'Ilk odev verildi', 'Ilk odeviniz Subatin basina', 2018-01-31);
+
+INSERT INTO Duyuru (ders_id, sinif_id, sube_id, ilgili, duyuru_tipi, duyuru_basligi, duyuru_icerigi, duyuru_tarihi) VALUES (1, 6, 'C', 0, 3, 'Ilk quiz vakti', 'Ilk quiziniz Subatin basina', 2018-01-31);
+
+INSERT INTO Duyuru (ders_id, sinif_id, sube_id, ilgili, duyuru_tipi, duyuru_basligi, duyuru_icerigi, duyuru_tarihi) VALUES (1, 6, 'C', 0, 4, 'Ilk dokuman verildi', 'Ilk dokumaniniz Subatin basina', 2018-01-31);
+
+INSERT INTO Duyuru (ders_id, sinif_id, sube_id, ilgili, duyuru_tipi, duyuru_basligi, duyuru_icerigi, duyuru_tarihi) VALUES (1, 6, 'C', 0, 5, 'Ilk etkinlik', 'Ilk etkinlik Martta', 2018-01-31);
