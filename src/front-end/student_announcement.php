@@ -18,40 +18,210 @@ th {text-align: left;}
 <body>
 
   <?php
+    session_start(); // start the session
+    $current_ogrenciId = $_SESSION['user_id'];
+
     $connection = mysqli_connect('localhost','root','root','db_academic','8889','/Applications/MAMP/tmp/mysql/mysql.sock');
 
     if($connection) {
-        $sql_log = "SELECT de.ders_adi, si.sinav_no
-                    FROM Ogrenci AS og, Odev AS od, Sinav As si, Quiz As qu, Ders AS de, Ders_Duyurusu AS dd
-                    WHERE og.ogrenci_id = 123 AND og.sinif_id = dd.sinif_id AND og.sube_id = dd.sube_id
-                      AND dd.ders_id =de.ders_id;";
-        $result = mysqli_query($connection, $sql_log);
+  ?>
+        <h2>Genel</h2>
+        <div class="line">
+        <p>
+            <?php
+              $announcement_code = 0;
+              INCLUDE('student_announcementSql.php');
+              $sql_log = $sql . $announcement_code . ";";
+              $result = mysqli_query($connection, $sql_log);
 
-        ?>
-        <h2>Sinavlar</h2>
-        <p><?php
-          while($row_log = mysqli_fetch_row($result)) {
-            $ders_adi = $row_log[0];
-            $sinav_no = $row_log[1];
-
+              while($row_log = mysqli_fetch_row($result)) {
             ?>
-            <li><a href="#">Ders Adi: <?php echo $ders_adi; ?> Sinav No: <?php echo $sinav_no; ?></a></li>
-          <?php }} ?>
+            <li>
+              <h3>Ders Adi: <?php echo $row_log[0]; ?> </h3>
+              <h4>Duyuru Basligi: <?php echo $row_log[1]; ?> </h4>
+              <h5>Duyuru Icerigi: <?php echo $row_log[2]; ?> </h5>
+              <h6>Duyuru Tarihi: <?php echo $row_log[3]; ?> </h6>
+            </li>
+
+            <?php
+              }
+              mysqli_free_result($result);
+            ?>
         </p>
-        <div class="line"></div>
 
-        <h2>Baslik2</h2>
-        <p> Icerik2</p>
-        <div class="line"></div>
+    <h2>Sinav</h2>
+    <div class="line">
+    <p>
+        <?php
+          $announcement_code = 1;
+          INCLUDE('student_announcementSql.php');
+          $sql_log = $sql . $announcement_code . ";";
+          $result = mysqli_query($connection, $sql_log);
 
-        <h2>Baslik3</h2>
-        <p> Icerik3 </p>
-        <div class="line"></div>
+          while($row_log = mysqli_fetch_row($result)) {
+        ?>
+        <li>
+          <h3>Ders Adi: <?php echo $row_log[0]; ?> </h3>
+          <h4>Duyuru Basligi: <?php echo $row_log[1]; ?> </h4>
+          <h5>Duyuru Icerigi: <?php echo $row_log[2]; ?> </h5>
+          <h6>Duyuru Tarihi: <?php echo $row_log[3]; ?> </h6>
+        </li>
 
-        <h3>Baslik4</h3>
-        <p> Icerik4</p>
+        <?php
+          }
+          mysqli_free_result($result);
+        ?>
+    </p>
+
+    <h2>Odev</h2>
+    <div class="line">
+    <p>
+        <?php
+          $announcement_code = 2;
+          INCLUDE('student_announcementSql.php');
+          $sql_log = $sql . $announcement_code . ";";
+          $result = mysqli_query($connection, $sql_log);
+
+          while($row_log = mysqli_fetch_row($result)) {
+        ?>
+        <li>
+          <h3>Ders Adi: <?php echo $row_log[0]; ?> </h3>
+          <h4>Duyuru Basligi: <?php echo $row_log[1]; ?> </h4>
+          <h5>Duyuru Icerigi: <?php echo $row_log[2]; ?> </h5>
+          <h6>Duyuru Tarihi: <?php echo $row_log[3]; ?> </h6>
+        </li>
+
+        <?php
+          }
+          mysqli_free_result($result);
+        ?>
+    </p>
+
+    <h2>Quiz</h2>
+    <div class="line">
+    <p>
+        <?php
+          $announcement_code = 3;
+          INCLUDE('student_announcementSql.php');
+          $sql_log = $sql . $announcement_code . ";";
+          $result = mysqli_query($connection, $sql_log);
+
+          while($row_log = mysqli_fetch_row($result)) {
+        ?>
+        <li>
+          <h3>Ders Adi: <?php echo $row_log[0]; ?> </h3>
+          <h4>Duyuru Basligi: <?php echo $row_log[1]; ?> </h4>
+          <h5>Duyuru Icerigi: <?php echo $row_log[2]; ?> </h5>
+          <h6>Duyuru Tarihi: <?php echo $row_log[3]; ?> </h6>
+        </li>
+
+        <?php
+          }
+          mysqli_free_result($result);
+        ?>
+    </p>
+
+    <h2>Dokuman</h2>
+    <div class="line">
+    <p>
+        <?php
+          $announcement_code = 4;
+          INCLUDE('student_announcementSql.php');
+          $sql_log = $sql . $announcement_code . ";";
+          $result = mysqli_query($connection, $sql_log);
+
+          while($row_log = mysqli_fetch_row($result)) {
+        ?>
+        <li>
+          <h3>Ders Adi: <?php echo $row_log[0]; ?> </h3>
+          <h4>Duyuru Basligi: <?php echo $row_log[1]; ?> </h4>
+          <h5>Duyuru Icerigi: <?php echo $row_log[2]; ?> </h5>
+          <h6>Duyuru Tarihi: <?php echo $row_log[3]; ?> </h6>
+        </li>
+
+        <?php
+          }
+          mysqli_free_result($result);
+        ?>
+    </p>
+
+    <h2>Etkinlik</h2>
+    <div class="line">
+    <p>
+        <?php
+          $announcement_code = 5;
+          INCLUDE('student_announcementSql.php');
+          $sql_log = $sql . $announcement_code . ";";
+          $result = mysqli_query($connection, $sql_log);
+
+          while($row_log = mysqli_fetch_row($result)) {
+        ?>
+        <li>
+          <h3>Ders Adi: <?php echo $row_log[0]; ?> </h3>
+          <h4>Duyuru Basligi: <?php echo $row_log[1]; ?> </h4>
+          <h5>Duyuru Icerigi: <?php echo $row_log[2]; ?> </h5>
+          <h6>Duyuru Tarihi: <?php echo $row_log[3]; ?> </h6>
+        </li>
+
+        <?php
+          }
+          mysqli_free_result($result);
+        ?>
+    </p>
+
+    <h2>Gezi</h2>
+    <div class="line">
+    <p>
+        <?php
+          $announcement_code = 6;
+          INCLUDE('student_announcementSql.php');
+          $sql_log = $sql . $announcement_code . ";";
+          $result = mysqli_query($connection, $sql_log);
+
+          while($row_log = mysqli_fetch_row($result)) {
+        ?>
+        <li>
+          <h3>Ders Adi: <?php echo $row_log[0]; ?> </h3>
+          <h4>Duyuru Basligi: <?php echo $row_log[1]; ?> </h4>
+          <h5>Duyuru Icerigi: <?php echo $row_log[2]; ?> </h5>
+          <h6>Duyuru Tarihi: <?php echo $row_log[3]; ?> </h6>
+        </li>
+
+        <?php
+          }
+          mysqli_free_result($result);
+        ?>
+    </p>
 
 
+    <h2>Toplanti</h2>
+    <div class="line">
+    <p>
+        <?php
+          $announcement_code = 7;
+          INCLUDE('student_announcementSql.php');
+          $sql_log = $sql . $announcement_code . ";";
+          $result = mysqli_query($connection, $sql_log);
+
+          while($row_log = mysqli_fetch_row($result)) {
+        ?>
+        <li>
+          <h3>Ders Adi: <?php echo $row_log[0]; ?> </h3>
+          <h4>Duyuru Basligi: <?php echo $row_log[1]; ?> </h4>
+          <h5>Duyuru Icerigi: <?php echo $row_log[2]; ?> </h5>
+          <h6>Duyuru Tarihi: <?php echo $row_log[3]; ?> </h6>
+        </li>
+
+        <?php
+          }
+          mysqli_free_result($result);
+        ?>
+    </p>
+
+    <?php
+      }
+      mysqli_close($conn);
+    ?>
 
 </body>
 </html>
