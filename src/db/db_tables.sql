@@ -149,21 +149,6 @@ CREATE TABLE Okudugu_Kitaplar (
     PRIMARY KEY (ogrenci_id, kitap_adi, kitap_yazari)
 );
 
-CREATE TABLE Ders_Duyurusu (
-    ders_duyuruId INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    ders_id INT UNSIGNED NOT NULL,
-    sinif_id INT UNSIGNED NOT NULL,
-    sube_id CHAR(1) NOT NULL,
-    duyuru_tipi SMALLINT UNSIGNED NOT NULL,
-    duyuru_tarihi DATE NOT NULL,
-
-    FOREIGN KEY (ders_id) REFERENCES Ders(ders_id),
-    #FOREIGN KEY (sinif_id) REFERENCES Sinif(sinif_id),
-    #FOREIGN KEY (sube_id) REFERENCES Sinif(sube_id),
-
-		PRIMARY KEY (ders_duyuruId, ders_id, sinif_id, sube_id)
-);
-
 CREATE TABLE Odev (
     odev_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     ders_id INT UNSIGNED NOT NULL,
@@ -255,19 +240,23 @@ CREATE TABLE Ders_Notu (
     PRIMARY KEY (ogrenci_id, ders_id, notlandirma_tipi, notlandirma_no)
 );
 
-CREATE TABLE Sinif_Duyurusu (
-    sinif_duyuruId INT UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE Duyuru (
+    duyuru_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+		ders_id INT UNSIGNED NOT NULL,
     sinif_id INT UNSIGNED NOT NULL,
     sube_id CHAR(1) NOT NULL,
+		ilgili SMALLINT UNSIGNED NOT NULL, /* 1: only parents will see, 0: both student and parent will see */
     duyuru_tipi SMALLINT UNSIGNED NOT NULL,
+		/* 0: general, 1: exam, 2:homework, 3: quiz, 4: document, 5: activity, 6: trip, 7: meeting */
     duyuru_basligi VARCHAR(137) NOT NULL,
     duyuru_icerigi VARCHAR(255) NOT NULL,
     duyuru_tarihi DATE NOT NULL,
 
+		FOREIGN KEY (ders_id) REFERENCES Ders(ders_id),
     #FOREIGN KEY (sinif_id) REFERENCES Sinif(sinif_id),
     #FOREIGN KEY (sube_id) REFERENCES Sinif(sube_id),
 
-    PRIMARY KEY (sinif_duyuruId, sinif_id, sube_id)
+    PRIMARY KEY (duyuru_id, ders_id, sinif_id, sube_id)
 );
 
 CREATE TABLE Toplanti (
