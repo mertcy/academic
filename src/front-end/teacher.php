@@ -4,16 +4,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
         <title>Academic Ogretmen Sayfasi</title>
-
         <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!-- Our Custom CSS -->
         <link rel="stylesheet" href="/src/css/template.css">
         <!-- Scrollbar Custom CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-
     </head>
     <?php
         session_start(); // start the session
@@ -21,7 +18,6 @@
             header("location:login.php");
         }
         $current_OgretmenId = $_SESSION['user_id'];
-
         $connection = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
         if ($connection) {
             $sql_log = "SELECT o.ogretmen_id, k.kisi_adi, k.kisi_soyadi FROM Ogretmen AS o, Kisi AS k
@@ -45,11 +41,11 @@
                   <li>
                       <a href="#">Duyurular</a>
                   </li>
-                    <li>
-                        <a href="#Homework" onclick="showHomeworkField(<?php echo $current_OgretmenId; ?>)">Odevler</a>
+
+                  <li class="active">
+                        <a href="#Homework" data-toggle="collapse" aria-expanded="false">Odevler</a>
                         <script>
                         function showHomeworkField(ogretmen_url) {
-
                           if (window.XMLHttpRequest) {
                             // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
@@ -65,8 +61,27 @@
                           xmlhttp.send();
                         }
                         </script>
+                        <ul class="collapse list-unstyled" id="Homework">
+                          <?php
+                            $connection = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+
+                            if ($connection) {
+                                $sql = "SELECT s.sinif_id, s.sube_id
+                                        FROM Sinif AS s, Ogretmen AS o
+                                        WHERE o.ogretmen_id = $current_OgretmenId AND o.ogretmen_id = s.ogretmen_id";
+                                $result = mysqli_query($connection, $sql);
+                                while ($row_log = mysqli_fetch_row($result)) {
+                                    $sinif_adi = $row_log[0];
+                                    $sube_adi = $row_log[1]; ?>
+                                    <li><a href="#" onclick="showHomeworkField(<?php echo $current_ogrenciId; ?>)"><?php echo $sinif_adi."-".$sube_adi; ?></a></li>
+                                    <?php
+                                }
+                            }
+                        ?>
+                      </ul>
                     </li>
-                    <li>
+
+                   <li>
                         <a href="#Quiz" onclick="showQuizField(<?php echo $current_OgretmenId; ?>)">Quizler</a>
                         <script>
                         function showQuizField(ogretmen_url) {
@@ -85,7 +100,8 @@
                           xmlhttp.send();
                         }
                         </script>
-                    </li>
+                   </li>
+
                     <li>
                         <a href="#">Notlar</a>
                     </li>
