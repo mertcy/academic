@@ -76,11 +76,23 @@
                                       $ogrenci_adi = $row_log[8];
                                       $ogrenci_soyadi = $row_log[9];
                                       ?>
-                                      <li><a href="#"><?php echo $ders_adi; ?></a></li>
+                                      <li><a href="#" class="ders" id="<?php echo $row_log[6]; ?>" name="<?php echo $ders_adi; ?>"><?php echo $ders_adi; ?></a></li>
                                       <?php
                                   }
                               }
+                              mysqli_free_result($result);
+                              mysqli_close($connection);
                           ?>
+                          <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+                          <script>
+                              $( ".ders" ).click(function() {
+                                var ders_id = this.id;
+
+                                document.cookie = "ders_id=" + ders_id + ";";
+                                $("#studentContent").load('student_class.php');
+                              });
+
+                          </script>
                         </ul>
                     </li>
                     <li>
@@ -143,7 +155,7 @@
                     </div>
                 </nav>
 
-                <div id="announcements"><b><?php INCLUDE('student_announcement.php'); ?></b></div>
+                <div id="studentContent"><b><?php INCLUDE('student_announcement.php'); ?></b></div>
                 <!-- announcements related to students will be listed here -->
 
               </div>
