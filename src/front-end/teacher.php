@@ -38,9 +38,13 @@
                 </div>
                 <ul class="list-unstyled components">
                   <p>Ogretmen Anasayfa</p>
+<!---**********************************************'Duyurular' Content Begins ------------------------------------------------------------------------------------------------------------------------->
+
                   <li>
                       <a href="#">Duyurular</a>
                   </li>
+
+<!---**********************************************'Odevler' Content Begins ------------------------------------------------------------------------------------------------------------------------->
 
                   <li class="active">
                         <a href="#Homework" data-toggle="collapse" aria-expanded="false">Odevler</a>
@@ -64,7 +68,6 @@
                         <ul class="collapse list-unstyled" id="Homework">
                           <?php
                             $connection = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
-
                             if ($connection) {
                                 $sql = "SELECT s.sinif_id, s.sube_id
                                         FROM Sinif AS s, Ogretmen AS o
@@ -72,15 +75,29 @@
                                 $result = mysqli_query($connection, $sql);
                                 while ($row_log = mysqli_fetch_row($result)) {
                                     $sinif_adi = $row_log[0];
-                                    $sube_adi = $row_log[1]; ?>
-                                    <li><a href="#" onclick="showHomeworkField(<?php echo $current_ogrenciId; ?>)"><?php echo $sinif_adi."-".$sube_adi; ?></a></li>
+                                    $sube_adi = $row_log[1];
+                                    $sinif_sube = $sinif_adi."-".$sube_adi;
+                                    ?>
+                                    <li><a href="#" onclick="showHomeworkField(<?php echo $current_OgretmenId; ?>)" class="odev" id="<?php echo $sinif_adi."-".$sube_adi; ?>" name="<?php echo $sube_adi; ?>"><?php echo $sinif_adi."-".$sube_adi; ?></a></li>
                                     <?php
                                 }
                             }
+                            mysqli_free_result($result);
+                            mysqli_close($connection);
                         ?>
+                        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+                        <script>
+                            $( ".odev" ).click(function() {
+                              var sinif_id = this.id;
+                              document.cookie = "sinif_sube_id=" + sinif_id + ";";
+                              $("#teacherContent").load('teacher_homework.php');
+                            });
+
+                        </script>
                       </ul>
                     </li>
 
+<!---**********************************************'Quizler' Content Begins ------------------------------------------------------------------------------------------------------------------------->
                    <li>
                         <a href="#Quiz" onclick="showQuizField(<?php echo $current_OgretmenId; ?>)">Quizler</a>
                         <script>
@@ -101,7 +118,7 @@
                         }
                         </script>
                    </li>
-
+<!---**********************************************'Notlar' Content Begins ------------------------------------------------------------------------------------------------------------------------->
                     <li>
                         <a href="#">Notlar</a>
                     </li>
