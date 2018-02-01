@@ -65,19 +65,51 @@
 
                               if($connection) {
                                   $sql_log = "SELECT o.ogrenci_id, o.sinif_id, o.sube_id, dp.ders_programId, dp.sinif_id, dp.sube_id,
-                                                     d.ders_id, d.ders_adi, k.kisi_adi, k.kisi_soyadi
-                                              FROM Ogrenci AS o, Ders_Programi AS dp, Ders AS d, Kisi AS k
+                                                     d.ders_id, d.ders_adi, k.kisi_adi, k.kisi_soyadi, ku.kullanici_parolasi
+                                              FROM Ogrenci AS o, Ders_Programi AS dp, Ders AS d, Kisi AS k, Kullanici AS ku
                                               WHERE o.ogrenci_id = $current_ogrenciId AND d.ders_id = dp.ders_programId
-                                              AND   o.sinif_id = dp.sinif_id AND  o.sube_id = dp.sube_id AND kisi_id = $current_ogrenciId ";
+                                              AND   o.sinif_id = dp.sinif_id AND  o.sube_id = dp.sube_id AND kisi_id = $current_ogrenciId AND kullanici_id = $current_ogrenciId";
                                   $result = mysqli_query($connection, $sql_log);
 
                                   while($row_log = mysqli_fetch_row($result)) {
                                       $ders_adi = $row_log[7];
                                       $ogrenci_adi = $row_log[8];
                                       $ogrenci_soyadi = $row_log[9];
+                                      $ogrenci_parolasi = $row_log[10];
                                       ?>
                                       <li><a href="#" class="ders" id="<?php echo $row_log[6]; ?>" name="<?php echo $ders_adi; ?>"><?php echo $ders_adi; ?></a></li>
                                       <?php
+                                  }
+                                  if(isset($_POST['kayit'])) {
+                                    $eskiPass = $_POST['eskipass'];
+                                    $yeniPass = $_POST['yenipass'];
+                                    $yeniPassT = $_POST['yenipasst'];
+                                    if($eskiPass == "")
+                                    {
+                                     echo "<script type='text/javascript'>alert('Eski sifrenizi giriniz');</script>";
+                                    }
+                                    else if($yeniPass == "")
+                                    {
+                                     echo "<script type='text/javascript'>alert('Yeni sifre giriniz');</script>";
+                                    }
+                                    else if($eskiPass != $ogrenci_parolasi)
+                                    {
+                                     echo "<script type='text/javascript'>alert('Eski sifrenizi dogru giriniz');</script>";
+                                    }
+                                    else if($yeniPass != $yeniPassT)
+                                    {
+                                     echo "<script type='text/javascript'>alert('Yeni sifreyi ayni girdiginizden emin olun');</script>";
+                                    }
+                                    else
+                                    {
+                                      $sql = "UPDATE Kullanici SET kullanici_parolasi='$yeniPass' WHERE kullanici_id=$current_ogrenciId";
+                                      if (mysqli_query($connection, $sql)) {
+                                          echo "<script type='text/javascript'>alert('Sifreniz degistirilmistir');</script>";
+                                      } else {
+                                          echo "<script type='text/javascript'>alert('Hata lutfen tekrar deneyiniz');</script>";
+                                      }
+
+                                    }
                                   }
                               }
                               mysqli_free_result($result);
@@ -148,7 +180,7 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
                               <li><a href="#"><?php echo $ogrenci_adi." ".$ogrenci_soyadi; ?></a></li>
-                              <li><a href="#"><?php echo "Sifremi degistir"; ?></a></li>
+                              <li><a data-toggle = "modal" class="button" name="changepass" id="changepass" data-target = "#sifre_degistir_Modal">Sifremi degistir</a></li>
                               <li><a href="logout.php"><?php echo "Guvenli cikis"; ?></a></li>
                             </ul>
                         </div>
@@ -169,18 +201,48 @@
         <!-- jQuery Custom Scroller CDN -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#sidebar").mCustomScrollbar({
-                    theme: "minimal"
-                });
 
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar, #content').toggleClass('active');
-                    $('.collapse.in').toggleClass('in');
-                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-                });
-            });
-        </script>
     </body>
 </html>
+<div id='sifre_degistir_Modal' class='modal fade'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Sifre Degistirme</h4>
+      </div>
+      <div class="modal-body">
+        <form method='post' id='insert_form'>
+          <label>Eski Sifre</label>
+          <input type="password" name="eskipass" id="eskipass" class="form-control" placeholder="Eski sifre" />
+          <br />
+          <label>Yeni Sifre</label>
+          <input type="password" name="yenipass" id="yenipass" class="form-control" placeholder="Yeni sifre" />
+          <br />
+          <label>Yeni Sifre(tekrar)</label>
+          <input type="password" name="yenipasst" id="yenipasst" class="form-control" placeholder="Yeni sifre(tekrar)" />
+          <br />
+          <input type="submit" name="kayit" id="kayit" value="Kayit" class="btn btn-success" />
+        </form>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#sidebar").mCustomScrollbar({
+            theme: "minimal"
+        });
+
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar, #content').toggleClass('active');
+            $('.collapse.in').toggleClass('in');
+            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        });
+    });
+</script>
