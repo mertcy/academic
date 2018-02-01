@@ -20,12 +20,44 @@
         $current_OgretmenId = $_SESSION['user_id'];
         $connection = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
         if ($connection) {
-            $sql_log = "SELECT o.ogretmen_id, k.kisi_adi, k.kisi_soyadi FROM Ogretmen AS o, Kisi AS k
-          WHERE o.ogretmen_id = $current_OgretmenId AND kisi_id = $current_OgretmenId";
+            $sql_log = "SELECT o.ogretmen_id, k.kisi_adi, k.kisi_soyadi, ku.kullanici_parolasi FROM Ogretmen AS o, Kisi AS k, Kullanici AS ku
+          WHERE o.ogretmen_id = $current_OgretmenId AND kisi_id = $current_OgretmenId AND kullanici_id = $current_OgretmenId";
             $result = mysqli_query($connection, $sql_log);
             while ($row_log = mysqli_fetch_row($result)) {
                 $ogretmen_adi = $row_log[1];
                 $ogretmen_soyadi = $row_log[2];
+                $ogretmen_parolasi = $row_log[3];
+            }
+            if(isset($_POST['kayit'])) {
+              $eskiPass = $_POST['eskipass'];
+              $yeniPass = $_POST['yenipass'];
+              $yeniPassT = $_POST['yenipasst'];
+              if($eskiPass == "")
+              {
+               echo "<script type='text/javascript'>alert('Eski sifrenizi giriniz');</script>";
+              }
+              else if($yeniPass == "")
+              {
+               echo "<script type='text/javascript'>alert('Yeni sifre giriniz');</script>";
+              }
+              else if($eskiPass != $ogretmen_parolasi)
+              {
+               echo "<script type='text/javascript'>alert('Eski sifrenizi dogru giriniz');</script>";
+              }
+              else if($yeniPass != $yeniPassT)
+              {
+               echo "<script type='text/javascript'>alert('Yeni sifreyi ayni girdiginizden emin olun');</script>";
+              }
+              else
+              {
+                $sql = "UPDATE Kullanici SET kullanici_parolasi='$yeniPass' WHERE kullanici_id=$current_OgretmenId";
+                if (mysqli_query($connection, $sql)) {
+                    echo "<script type='text/javascript'>alert('Sifreniz degistirilmistir');</script>";
+                } else {
+                    echo "<script type='text/javascript'>alert('Hata lutfen tekrar deneyiniz');</script>";
+                }
+
+              }
             }
         }
     ?>
@@ -147,7 +179,7 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
                               <li><a href="#"><?php echo $ogretmen_adi." ".$ogretmen_soyadi; ?></a></li>
-                              <li><a href="#"><?php echo "Sifremi degistir"; ?></a></li>
+                              <li><a data-toggle = "modal" class="button" name="changepass" id="changepass" data-target = "#sifre_degistir_Modal">Sifremi degistir</a></li>
                               <li><a href="logout.php"><?php echo "Guvenli cikis"; ?></a></li>
                             </ul>
                         </div>
@@ -164,18 +196,48 @@
         <!-- jQuery Custom Scroller CDN -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#sidebar").mCustomScrollbar({
-                    theme: "minimal"
-                });
-
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar, #content').toggleClass('active');
-                    $('.collapse.in').toggleClass('in');
-                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-                });
-            });
-        </script>
     </body>
 </html>
+
+<div id='sifre_degistir_Modal' class='modal fade'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Sifre Degistirme</h4>
+      </div>
+      <div class="modal-body">
+        <form method='post' id='insert_form'>
+          <label>Eski Sifre</label>
+          <input type="password" name="eskipass" id="eskipass" class="form-control" placeholder="Eski sifre" />
+          <br />
+          <label>Yeni Sifre</label>
+          <input type="password" name="yenipass" id="yenipass" class="form-control" placeholder="Yeni sifre" />
+          <br />
+          <label>Yeni Sifre(tekrar)</label>
+          <input type="password" name="yenipasst" id="yenipasst" class="form-control" placeholder="Yeni sifre(tekrar)" />
+          <br />
+          <input type="submit" name="kayit" id="kayit" value="Kayit" class="btn btn-success" />
+        </form>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#sidebar").mCustomScrollbar({
+            theme: "minimal"
+        });
+
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar, #content').toggleClass('active');
+            $('.collapse.in').toggleClass('in');
+            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        });
+    });
+</script>
