@@ -62,6 +62,44 @@
               }
             }
         }
+
+        // teacher_quiz.php page form modal functions
+        session_start();
+        $connection_quiz = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+        if ($connection_quiz) {
+          $control = 1;
+          if(isset($_POST['gonder'])) {
+              $sinif_quiz = $_POST['sinif_quiz'];
+              $sube_quiz = $_POST['sube_quiz'];
+              $link_quiz = $_POST['quizlink'];
+              if($sinif_quiz == "" || $sinif_quiz < 1 || $sinif_quiz > 12)
+              {
+               echo "<script type='text/javascript'>alert('Sinifi yanlis girdiniz. Lutfen tekrar deneyin.');</script>";
+               $control = 0;
+              }
+              else if($sube_quiz == "" || strlen($sube_quiz) > 1)
+              {
+               echo "<script type='text/javascript'>alert('Subeyi yanlis girdiniz. Lutfen tekrar deneyin.');</script>";
+               $control = 0;
+              }
+              else if($link_quiz == "")
+              {
+               echo "<script type='text/javascript'>alert('Quiz linkini giriniz.');</script>";
+               $control = 0;
+              }
+              else if($control == 1){
+                $sqlQuiz = "INSERT INTO `Quiz` (`quiz_id`, `ders_id`, `sinif_id`, `sube_id`, `duyuru_tipi`, `quiz_no`, `quiz_tarihi`, `notlandirma_tipi`, `not_yuzdesi`, `link`) VALUES ('', '', '$sinif_quiz', '$sube_quiz', '1', '', '2018-02-08', '5', '5', '$link_quiz')";
+                if (mysqli_query($connection_quiz, $sqlQuiz)) {
+                  echo "<script type='text/javascript'>alert('Quiz basariyla $sinif_quiz-$sube_quiz sinifina eklenmistir.');</script>";
+                } else {
+                  echo "<script type='text/javascript'>alert('Quiz eklenemedi. Lutfen tekrar deneyiniz.');</script>";
+                }
+              }
+              echo '<script>window.location.href = "teacher.php";</script>';
+           }
+        }
+        mysqli_free_result($result_quiz);
+        mysqli_close($connection_quiz);
     ?>
     <body>
         <div class="wrapper">

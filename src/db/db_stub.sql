@@ -59,3 +59,5 @@ INSERT INTO Duyuru (ders_id, sinif_id, sube_id, ilgili, duyuru_tipi, duyuru_basl
 ALTER TABLE `Ogretmen` ADD `brans` VARCHAR(25) NOT NULL AFTER `ogretmen_id`;
 
 UPDATE `Ogretmen` SET `brans` = 'FenBilgisi' WHERE `Ogretmen`.`ogretmen_id` = 3;
+
+ALTER TABLE `Quiz` ADD `link` VARCHAR(100) NOT NULL AFTER `not_yuzdesi`;
