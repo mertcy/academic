@@ -55,3 +55,7 @@ INSERT INTO Duyuru (ders_id, sinif_id, sube_id, ilgili, duyuru_tipi, duyuru_basl
 INSERT INTO Duyuru (ders_id, sinif_id, sube_id, ilgili, duyuru_tipi, duyuru_basligi, duyuru_icerigi, duyuru_tarihi) VALUES (1, 6, 'C', 0, 4, 'Ilk dokuman verildi', 'Ilk dokumaniniz Subatin basina', 2018-01-31);
 
 INSERT INTO Duyuru (ders_id, sinif_id, sube_id, ilgili, duyuru_tipi, duyuru_basligi, duyuru_icerigi, duyuru_tarihi) VALUES (1, 6, 'C', 0, 5, 'Ilk etkinlik', 'Ilk etkinlik Martta', 2018-01-31);
+
+ALTER TABLE `Ogretmen` ADD `brans` VARCHAR(25) NOT NULL AFTER `ogretmen_id`;
+
+UPDATE `Ogretmen` SET `brans` = 'FenBilgisi' WHERE `Ogretmen`.`ogretmen_id` = 3;
