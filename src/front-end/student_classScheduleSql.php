@@ -1,29 +1,63 @@
 <?php
 $sql_log = "SELECT og.sinif_id, og.sube_id
             FROM Ogrenci AS og
-            WHERE og.ogrenci_id = 1";
+            WHERE og.ogrenci_id =   $current_ogrenciId";
 $result = mysqli_query($connection, $sql_log);
-
 
 $sql_ders = "SELECT d.ders_adi
             FROM Ders As d
-            INNER JOIN Ders_Programi ON Ders_Programi.ders_programId = d.ders_id
-            WHERE Ders_Programi.sinif_id = 6 AND Ders_Programi.sube_id='C' AND Ders_Programi.ders_gunu= 1
-            AND Ders_Programi.ders_saati= 1 ";
+            INNER JOIN Sinif_Ders_Programi ON Sinif_Ders_Programi.ders_id = d.ders_id
+            WHERE Sinif_Ders_Programi.sinif_id = '$sinif_id' AND Sinif_Ders_Programi.sube_id= '$sube_id' AND
+            Sinif_Ders_Programi.ders_zamani = 1";
 $result_ders = mysqli_query($connection, $sql_ders);
 
 $sql_ders2 = "SELECT d.ders_adi
             FROM Ders As d
-            INNER JOIN Ders_Programi ON Ders_Programi.ders_programId = d.ders_id
-            WHERE Ders_Programi.sinif_id = 6 AND Ders_Programi.sube_id='C' AND Ders_Programi.ders_gunu= 2
-            AND Ders_Programi.ders_saati= 2 ";
+            INNER JOIN Sinif_Ders_Programi ON Sinif_Ders_Programi.ders_id = d.ders_id
+            WHERE Sinif_Ders_Programi.sinif_id = '$sinif_id' AND Sinif_Ders_Programi.sube_id= '$sube_id' AND
+            Sinif_Ders_Programi.ders_zamani = 2";
 $result_ders2 = mysqli_query($connection, $sql_ders2);
 
 $sql_ders3 = "SELECT d.ders_adi
             FROM Ders As d
-            INNER JOIN Ders_Programi ON Ders_Programi.ders_programId = d.ders_id
-            WHERE Ders_Programi.sinif_id = 6 AND Ders_Programi.sube_id='C' AND Ders_Programi.ders_gunu= 3
-            AND Ders_Programi.ders_saati= 3 ";
+            INNER JOIN Sinif_Ders_Programi ON Sinif_Ders_Programi.ders_id = d.ders_id
+            WHERE Sinif_Ders_Programi.sinif_id = '$sinif_id' AND Sinif_Ders_Programi.sube_id= '$sube_id' AND
+            Sinif_Ders_Programi.ders_zamani = 3";
 $result_ders3 = mysqli_query($connection, $sql_ders3);
+
+$sql_ders4 = "SELECT d.ders_adi
+            FROM Ders As d
+            INNER JOIN Sinif_Ders_Programi ON Sinif_Ders_Programi.ders_id = d.ders_id
+            WHERE Sinif_Ders_Programi.sinif_id = '$sinif_id' AND Sinif_Ders_Programi.sube_id= '$sube_id' AND
+            Sinif_Ders_Programi.ders_zamani = 4";
+$result_ders4 = mysqli_query($connection, $sql_ders4);
+
+$sql_ders5 = "SELECT d.ders_adi
+            FROM Ders As d
+            INNER JOIN Sinif_Ders_Programi ON Sinif_Ders_Programi.ders_id = d.ders_id
+            WHERE Sinif_Ders_Programi.sinif_id = '$sinif_id' AND Sinif_Ders_Programi.sube_id= '$sube_id' AND
+            Sinif_Ders_Programi.ders_zamani = 5";
+$result_ders5 = mysqli_query($connection, $sql_ders5);
+
+$sql_ders6 = "SELECT d.ders_adi
+            FROM Ders As d
+            INNER JOIN Sinif_Ders_Programi ON Sinif_Ders_Programi.ders_id = d.ders_id
+            WHERE Sinif_Ders_Programi.sinif_id = '$sinif_id' AND Sinif_Ders_Programi.sube_id= '$sube_id' AND
+            Sinif_Ders_Programi.ders_zamani = 6";
+$result_ders6 = mysqli_query($connection, $sql_ders6);
+
+$sql_ders7 = "SELECT d.ders_adi
+            FROM Ders As d
+            INNER JOIN Sinif_Ders_Programi ON Sinif_Ders_Programi.ders_id = d.ders_id
+            WHERE Sinif_Ders_Programi.sinif_id = '$sinif_id' AND Sinif_Ders_Programi.sube_id= '$sube_id' AND
+            Sinif_Ders_Programi.ders_zamani = 7";
+$result_ders7 = mysqli_query($connection, $sql_ders7);
+
+$sql_ders8 = "SELECT d.ders_adi
+            FROM Ders As d
+            INNER JOIN Sinif_Ders_Programi ON Sinif_Ders_Programi.ders_id = d.ders_id
+            WHERE Sinif_Ders_Programi.sinif_id = '$sinif_id' AND Sinif_Ders_Programi.sube_id= '$sube_id' AND
+            Sinif_Ders_Programi.ders_zamani = 8";
+$result_ders8 = mysqli_query($connection, $sql_ders8);
 
 ?>

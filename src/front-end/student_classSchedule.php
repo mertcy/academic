@@ -2,13 +2,22 @@
 <html>
 <head>
   <?php
-    $connection = mysqli_connect('localhost','root','root','db_academic','8889','/Applications/MAMP/tmp/mysql/mysql.sock');
+  session_start(); // start the session
+  $current_ogrenciId = $_SESSION['user_id'];
+
+  $sinif_id = $_SESSION['sinif_id'];
+  $sube_id = $_SESSION['sube_id'];
+
+
+  $connection = mysqli_connect('localhost','root','root','db_academic','8889','/Applications/MAMP/tmp/mysql/mysql.sock');
 
     if($connection) {
          INCLUDE('student_classScheduleSql.php');
 ?>
         <p><?php
           while($row_log = mysqli_fetch_row($result)) {
+            $sinif_id = $row_log[0];
+            $sube_id = $row_log[1];
             ?>
         <h2><?php echo $row_log[0];?>-<?php echo $row_log[1];?> Sınıfı Ders Programı</h2>
           <?php
@@ -24,6 +33,12 @@
           while($row_log = mysqli_fetch_row($result_ders)) {
             while($row_log2 = mysqli_fetch_row($result_ders2)) {
               while($row_log3 = mysqli_fetch_row($result_ders3)) {
+                while($row_log4 = mysqli_fetch_row($result_ders4)) {
+                  while($row_log5 = mysqli_fetch_row($result_ders5)) {
+                    while($row_log6 = mysqli_fetch_row($result_ders6)) {
+                      while($row_log7 = mysqli_fetch_row($result_ders7)) {
+                        while($row_log8 = mysqli_fetch_row($result_ders8)) {
+
           ?>
           <table style="width:100%" border="2">
             <tr>
@@ -36,37 +51,37 @@
             </tr>
             <tr>
               <td>8:30-9:20</td>
+               <th><?php echo $row_log4[0]; ?> </th>
                <th><?php echo $row_log[0]; ?> </th>
-               <th><?php echo $row_log[0]; ?> </th>
-              <th><?php echo $row_log2[0]; ?> </th>
-              <th><?php echo $row_log2[0]; ?> </th>
-              <th><?php echo $row_log3[0]; ?> </th>
+              <th><?php echo $row_log6[0]; ?> </th>
+              <th><?php echo $row_log4[0]; ?> </th>
+              <th><?php echo $row_log5[0]; ?> </th>
             </tr>
             <tr>
               <td>9:30-10:20</td>
+              <th><?php echo $row_log4[0]; ?> </th>
               <th><?php echo $row_log[0]; ?> </th>
-              <th><?php echo $row_log[0]; ?> </th>
-              <th><?php echo $row_log2[0]; ?> </th>
-              <th><?php echo $row_log2[0]; ?> </th>
-              <th><?php echo $row_log3[0]; ?> </th>
+              <th><?php echo $row_log6[0]; ?> </th>
+              <th><?php echo $row_log4[0]; ?> </th>
+              <th><?php echo $row_log5[0]; ?> </th>
 
             </tr>
             <tr>
               <td>10:30-11:20</td>
-              <th><?php echo $row_log[0]; ?> </th>
-              <th><?php echo $row_log[0]; ?> </th>
-              <th><?php echo $row_log2[0]; ?> </th>
-              <th><?php echo $row_log2[0]; ?> </th>
-              <th><?php echo $row_log[0]; ?> </th>
+              <th><?php echo $row_log6[0]; ?> </th>
+              <th><?php echo $row_log7[0]; ?> </th>
+              <th><?php echo $row_log8[0]; ?> </th>
+              <th><?php echo $row_log8[0]; ?> </th>
+              <th><?php echo $row_log8[0]; ?> </th>
 
             </tr>
             <tr>
               <td>11:30-12:20</td>
-              <th><?php echo $row_log[0]; ?> </th>
-              <th><?php echo $row_log[0]; ?> </th>
-              <th><?php echo $row_log2[0]; ?> </th>
-              <th><?php echo $row_log2[0]; ?> </th>
-              <th><?php echo $row_log[0]; ?> </th>
+              <th><?php echo $row_log6[0]; ?> </th>
+              <th><?php echo $row_log7[0]; ?> </th>
+              <th><?php echo $row_log8[0]; ?> </th>
+              <th><?php echo $row_log5[0]; ?> </th>
+              <th><?php echo $row_log5[0]; ?> </th>
 
             </tr>
             <tr>
@@ -79,25 +94,25 @@
             </tr>
             <tr>
               <td>13:30-14:20</td>
+              <th><?php echo $row_log2[0]; ?> </th>
               <th><?php echo $row_log3[0]; ?> </th>
-              <th><?php echo $row_log3[0]; ?> </th>
-              <th><?php echo $row_log[0]; ?> </th>
-              <th><?php echo $row_log[0]; ?> </th>
-              <th><?php echo $row_log3[0]; ?> </th>
+              <th><?php echo $row_log4[0]; ?> </th>
+              <th><?php echo $row_log8[0]; ?> </th>
+              <th><?php echo $row_log7[0]; ?> </th>
             </tr>
             <tr>
               <td>14:30-15:20</td>
+              <th><?php echo $row_log2[0]; ?> </th>
               <th><?php echo $row_log3[0]; ?> </th>
-              <th><?php echo $row_log3[0]; ?> </th>
-              <th><?php echo $row_log[0]; ?> </th>
-              <th><?php echo $row_log[0]; ?> </th>
-              <th><?php echo $row_log3[0]; ?> </th>
+              <th><?php echo $row_log4[0]; ?> </th>
+              <th><?php echo $row_log8[0]; ?> </th>
+              <th><?php echo $row_log7[0]; ?> </th>
 
             </tr>
           </table>
 
           <?php
-        }}}
+        }}}}}}}}
             mysqli_free_result($result);
           ?>
       </p>

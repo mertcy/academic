@@ -49,7 +49,7 @@
                           }
                           xmlhttp.onreadystatechange=function() {
                             if (this.readyState==4 && this.status==200) {
-                              document.getElementById("announcements").innerHTML=this.responseText;
+                              document.getElementById("studentContent").innerHTML=this.responseText;
                             }
                           }
                           xmlhttp.open("GET","student_announcement.php?q="+ogrenci_url,true);
