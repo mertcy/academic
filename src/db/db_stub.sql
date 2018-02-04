@@ -61,3 +61,51 @@ ALTER TABLE `Ogretmen` ADD `brans` VARCHAR(25) NOT NULL AFTER `ogretmen_id`;
 UPDATE `Ogretmen` SET `brans` = 'FenBilgisi' WHERE `Ogretmen`.`ogretmen_id` = 3;
 
 ALTER TABLE `Quiz` ADD `link` VARCHAR(100) NOT NULL AFTER `not_yuzdesi`;
+
+
+
+INSERT INTO `ders` (`ders_id`, `ders_adi`, `ders_icerigi`, `ders_katSayisi`, `ders_saatSayisi`) VALUES ('6', 'Muzik', 'Muzik Egitimi', '3', '3');
+
+INSERT INTO `ders` (`ders_id`, `ders_adi`, `ders_icerigi`, `ders_katSayisi`, `ders_saatSayisi`) VALUES ('7', 'Beden Egitimi', 'Beden Egitiminin Temelleri', '2', '2');
+
+INSERT INTO `ders` (`ders_id`, `ders_adi`, `ders_icerigi`, `ders_katSayisi`, `ders_saatSayisi`) VALUES ('8', 'SosyalBilgiler', 'Sosyal Bilgi Egitimi', '3', '3');
+
+ALTER TABLE `sinif_ders_programi`
+ADD `ders_zamani` INT(11) NOT NULL AFTER `ders_id`;
+
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '1', '1')
+
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '2', '2')
+
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '3', '3')
+
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '4', '4')
+
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '5', '5')
+
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '6', '6')
+
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '7', '7')
+
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '8', '8')
+
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '1', '5')
+
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '2', '4')
+
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '3', '3')
+
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '4', '2')
+
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '5', '1')
+
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '6', '8')
+
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '7', '6')
+
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '8', '7')
+
+
+
+
+
