@@ -73,39 +73,38 @@ INSERT INTO `ders` (`ders_id`, `ders_adi`, `ders_icerigi`, `ders_katSayisi`, `de
 ALTER TABLE `sinif_ders_programi`
 ADD `ders_zamani` INT(11) NOT NULL AFTER `ders_id`;
 
-INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '1', '1')
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '1', '1');
 
-INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '2', '2')
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '2', '2');
 
-INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '3', '3')
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '3', '3');
 
-INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '4', '4')
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '4', '4');
 
-INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '5', '5')
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '5', '5');
 
-INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '6', '6')
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '6', '6');
 
-INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '7', '7')
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '7', '7');
 
-INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '8', '8')
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('6', 'C', '8', '8');
 
-INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '1', '5')
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '1', '5');
 
-INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '2', '4')
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '2', '4');
 
-INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '3', '3')
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '3', '3');
 
-INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '4', '2')
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '4', '2');
 
-INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '5', '1')
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '5', '1');
 
-INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '6', '8')
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '6', '8');
 
-INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '7', '6')
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '7', '6');
 
-INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '8', '7')
+INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zamani`) VALUES ('7', 'B', '8', '7');
 
+UPDATE `Ders` SET `ders_adi` = 'FenBilgisi' WHERE `Ders`.`ders_id` = 4;
 
-
-
-
+UPDATE `Ders` SET `ders_adi` = 'BedenEgitimi' WHERE `Ders`.`ders_id` = 7;
