@@ -193,12 +193,66 @@
                         </script>
                    </li>
 <!---**********************************************'Notlar' Content Begins ------------------------------------------------------------------------------------------------------------------------->
-                    <li>
-                        <a href="#">Notlar</a>
-                    </li>
+
+                    <li class="active">
+                          <a href="#Notes" data-toggle="collapse" aria-expanded="false">Notlar</a>
+                          <script>
+                          function showNoteField(ogretmen_url) {
+                            if (window.XMLHttpRequest) {
+                              // code for IE7+, Firefox, Chrome, Opera, Safari
+                              xmlhttp=new XMLHttpRequest();
+                            } else { // code for IE6, IE5
+                              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                            }
+                            xmlhttp.onreadystatechange=function() {
+                              if (this.readyState==4 && this.status==200) {
+                                document.getElementById("teacherContent").innerHTML=this.responseText;
+                              }
+                            }
+                            xmlhttp.open("GET","teacher_note.php?q="+ogretmen_url,true);
+                            xmlhttp.send();
+                          }
+                          </script>
+                          <ul class="collapse list-unstyled" id="Notes">
+                            <?php
+                              $connection = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+                              if ($connection) {
+                                  $sql = "SELECT s.sinif_id, s.sube_id
+                                          FROM Sinif AS s, Ogretmen AS o
+                                          WHERE o.ogretmen_id = $current_OgretmenId AND o.ogretmen_id = s.ogretmen_id";
+                                  $result = mysqli_query($connection, $sql);
+                                  while ($row_log = mysqli_fetch_row($result)) {
+                                      $sinif_adi = $row_log[0];
+                                      $sube_adi = $row_log[1];
+                                      $sinif_sube = $sinif_adi."-".$sube_adi;
+                                      ?>
+                                      <li><a href="#" onclick="showNoteField(<?php echo $current_OgretmenId; ?>)" class="not" id="<?php echo $sinif_adi."-".$sube_adi; ?>" name="<?php echo $sube_adi; ?>"><?php echo $sinif_adi."-".$sube_adi; ?></a></li>
+                                      <?php
+                                  }
+                              }
+                              mysqli_free_result($result);
+                              mysqli_close($connection);
+                          ?>
+                          <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+                          <script>
+                              $( ".not" ).click(function() {
+                                var sinif_id = this.id;
+                                document.cookie = "sinif_sube_id=" + sinif_id + ";";
+                                $("#teacherContent").load('teacher_note.php');
+                              });
+
+                          </script>
+                        </ul>
+                      </li>
+
+<!---**********************************************'Toplantilar' Content Begins ------------------------------------------------------------------------------------------------------------------------->
+
                     <li>
                         <a href="#">Toplantilar</a>
                     </li>
+
+<!---**********************************************'Geziler' Content Begins ------------------------------------------------------------------------------------------------------------------------->
+
                     <li>
                         <a href="#">Geziler</a>
                     </li>
@@ -295,9 +349,6 @@
                 </form>
 
                 </div>
-
-
-
 
                 <script>
                 // Get the modal
