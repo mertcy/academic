@@ -88,7 +88,40 @@
         }
         mysqli_free_result($result_quiz);
         mysqli_close($connection_quiz);
-    ?>
+
+
+//********************************************** teacher_gezi.php page form modal functions ********************************************************************************************
+session_start();
+$connection_gezi = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+if ($connection_gezi) {
+    $control = 1;
+    if (isset($_POST['geziGonder'])) {
+        $sinif_gezi = $_POST['sinif_gezi'];
+        $sube_gezi = $_POST['sube_gezi'];
+        $gezi_basligi = $_POST['geziBaslik'];
+        $gezi_icerigi = $_POST['icerik'];
+        $gezi_tarihi = $_POST['geziTarihi'];
+
+        if ($sinif_gezi == "" || $sinif_gezi < 1 || $sinif_gezi > 12) {
+            echo "<script type='text/javascript'>alert('Sinifi yanlis girdiniz. Lutfen tekrar deneyin.');</script>";
+            $control = 0;
+        } elseif ($sube_gezi == "" || strlen($sube_gezi) > 1) {
+            echo "<script type='text/javascript'>alert('Subeyi yanlis girdiniz. Lutfen tekrar deneyin.');</script>";
+            $control = 0;
+        }  elseif ($control == 1) {
+            $sqlGezi = "INSERT INTO `geziler` (`sinif_id`, `sube_id`, `gezi_basligi`, `gezi_icerigi`, `gezi_tarihi`) VALUES ('$sinif_gezi', '$sube_gezi','$gezi_basligi','$gezi_icerigi','$gezi_tarihi')";
+            if (mysqli_query($connection_gezi, $sqlGezi)) {
+                echo "<script type='text/javascript'>alert('Gezi basariyla $sinif_gezi-$sube_gezi sinifina eklenmistir.');</script>";
+            } else {
+                echo "<script type='text/javascript'>alert('Gezi eklenemedi. Lutfen tekrar deneyiniz.');</script>";
+            }
+        }
+        echo '<script>window.location.href = "teacher.php";</script>';
+    }
+}
+mysqli_free_result($result_gezi);
+mysqli_close($connection_gezi);
+?>
 
 <!---**********************************************Body Page Content Begins ------------------------------------------------------------------------------------------------------------------------->
 
@@ -184,7 +217,7 @@
                         }
                         </script>
                    </li>
-                   
+
 <!---**********************************************'Notlar' Content Begins ------------------------------------------------------------------------------------------------------------------------->
 
                     <li class="active">
@@ -245,9 +278,26 @@
 
 <!---**********************************************'Geziler' Content Begins ------------------------------------------------------------------------------------------------------------------------->
 
-                    <li>
-                        <a href="#">Geziler</a>
-                    </li>
+              <li>
+                <a href="#Gezi" onclick="showGeziler(<?php echo $current_OgretmenId; ?>)">Geziler</a>
+                <script>
+                function showGeziler(ogretmen_url) {
+                  if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+                  } else { // code for IE6, IE5
+                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                  }
+                  xmlhttp.onreadystatechange=function() {
+                    if (this.readyState==4 && this.status==200) {
+                      document.getElementById("teacherContent").innerHTML=this.responseText;
+                    }
+                  }
+                  xmlhttp.open("GET","teacher_gezi.php?q="+ogretmen_url,true);
+                  xmlhttp.send();
+                }
+                </script>
+              </li>
                 </ul>
 
             </nav>
