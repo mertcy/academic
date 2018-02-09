@@ -14,6 +14,9 @@
         <!-- addAnnouncement Custom CSS -->
         <link rel="stylesheet" type="text/css" href="/src/css/addAnnouncement.css">
     </head>
+
+<!---**********************************************Header Content Begins ------------------------------------------------------------------------------------------------------------------------->
+
     <?php
         session_start(); // start the session
         if ($_SESSION['status']!="Active") {
@@ -30,77 +33,65 @@
                 $ogretmen_soyadi = $row_log[2];
                 $ogretmen_parolasi = $row_log[3];
             }
-            if(isset($_POST['kayit'])) {
-              $eskiPass = $_POST['eskipass'];
-              $yeniPass = $_POST['yenipass'];
-              $yeniPassT = $_POST['yenipasst'];
-              if($eskiPass == "")
-              {
-               echo "<script type='text/javascript'>alert('Eski sifrenizi giriniz');</script>";
-              }
-              else if($yeniPass == "")
-              {
-               echo "<script type='text/javascript'>alert('Yeni sifre giriniz');</script>";
-              }
-              else if($eskiPass != $ogretmen_parolasi)
-              {
-               echo "<script type='text/javascript'>alert('Eski sifrenizi dogru giriniz');</script>";
-              }
-              else if($yeniPass != $yeniPassT)
-              {
-               echo "<script type='text/javascript'>alert('Yeni sifreyi ayni girdiginizden emin olun');</script>";
-              }
-              else
-              {
-                $sql = "UPDATE Kullanici SET kullanici_parolasi='$yeniPass' WHERE kullanici_id=$current_OgretmenId";
-                if (mysqli_query($connection, $sql)) {
-                    echo "<script type='text/javascript'>alert('Sifreniz degistirilmistir');</script>";
+            if (isset($_POST['kayit'])) {
+                $eskiPass = $_POST['eskipass'];
+                $yeniPass = $_POST['yenipass'];
+                $yeniPassT = $_POST['yenipasst'];
+                if ($eskiPass == "") {
+                    echo "<script type='text/javascript'>alert('Eski sifrenizi giriniz');</script>";
+                } elseif ($yeniPass == "") {
+                    echo "<script type='text/javascript'>alert('Yeni sifre giriniz');</script>";
+                } elseif ($eskiPass != $ogretmen_parolasi) {
+                    echo "<script type='text/javascript'>alert('Eski sifrenizi dogru giriniz');</script>";
+                } elseif ($yeniPass != $yeniPassT) {
+                    echo "<script type='text/javascript'>alert('Yeni sifreyi ayni girdiginizden emin olun');</script>";
                 } else {
-                    echo "<script type='text/javascript'>alert('Hata lutfen tekrar deneyiniz');</script>";
+                    $sql = "UPDATE Kullanici SET kullanici_parolasi='$yeniPass' WHERE kullanici_id=$current_OgretmenId";
+                    if (mysqli_query($connection, $sql)) {
+                        echo "<script type='text/javascript'>alert('Sifreniz degistirilmistir');</script>";
+                    } else {
+                        echo "<script type='text/javascript'>alert('Hata lutfen tekrar deneyiniz');</script>";
+                    }
                 }
-
-              }
             }
         }
 
-        // teacher_quiz.php page form modal functions
+//********************************************** teacher_quiz.php page form modal functions ********************************************************************************************
+
         session_start();
         $connection_quiz = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
         if ($connection_quiz) {
-          $control = 1;
-          if(isset($_POST['gonder'])) {
-              $sinif_quiz = $_POST['sinif_quiz'];
-              $sube_quiz = $_POST['sube_quiz'];
-              $link_quiz = $_POST['quizlink'];
-              if($sinif_quiz == "" || $sinif_quiz < 1 || $sinif_quiz > 12)
-              {
-               echo "<script type='text/javascript'>alert('Sinifi yanlis girdiniz. Lutfen tekrar deneyin.');</script>";
-               $control = 0;
-              }
-              else if($sube_quiz == "" || strlen($sube_quiz) > 1)
-              {
-               echo "<script type='text/javascript'>alert('Subeyi yanlis girdiniz. Lutfen tekrar deneyin.');</script>";
-               $control = 0;
-              }
-              else if($link_quiz == "")
-              {
-               echo "<script type='text/javascript'>alert('Quiz linkini giriniz.');</script>";
-               $control = 0;
-              }
-              else if($control == 1){
-                $sqlQuiz = "INSERT INTO `Quiz` (`quiz_id`, `ders_id`, `sinif_id`, `sube_id`, `duyuru_tipi`, `quiz_no`, `quiz_tarihi`, `notlandirma_tipi`, `not_yuzdesi`, `link`) VALUES ('', '', '$sinif_quiz', '$sube_quiz', '1', '', '2018-02-08', '5', '5', '$link_quiz')";
-                if (mysqli_query($connection_quiz, $sqlQuiz)) {
-                  echo "<script type='text/javascript'>alert('Quiz basariyla $sinif_quiz-$sube_quiz sinifina eklenmistir.');</script>";
-                } else {
-                  echo "<script type='text/javascript'>alert('Quiz eklenemedi. Lutfen tekrar deneyiniz.');</script>";
+            $control = 1;
+            if (isset($_POST['gonder'])) {
+                $sinif_quiz = $_POST['sinif_quiz'];
+                $sube_quiz = $_POST['sube_quiz'];
+                $link_quiz = $_POST['quizlink'];
+                if ($sinif_quiz == "" || $sinif_quiz < 1 || $sinif_quiz > 12) {
+                    echo "<script type='text/javascript'>alert('Sinifi yanlis girdiniz. Lutfen tekrar deneyin.');</script>";
+                    $control = 0;
+                } elseif ($sube_quiz == "" || strlen($sube_quiz) > 1) {
+                    echo "<script type='text/javascript'>alert('Subeyi yanlis girdiniz. Lutfen tekrar deneyin.');</script>";
+                    $control = 0;
+                } elseif ($link_quiz == "") {
+                    echo "<script type='text/javascript'>alert('Quiz linkini giriniz.');</script>";
+                    $control = 0;
+                } elseif ($control == 1) {
+                    $sqlQuiz = "INSERT INTO `Quiz` (`quiz_id`, `ders_id`, `sinif_id`, `sube_id`, `duyuru_tipi`, `quiz_no`, `quiz_tarihi`, `notlandirma_tipi`, `not_yuzdesi`, `link`) VALUES ('', '', '$sinif_quiz', '$sube_quiz', '1', '', '2018-02-08', '5', '5', '$link_quiz')";
+                    if (mysqli_query($connection_quiz, $sqlQuiz)) {
+                        echo "<script type='text/javascript'>alert('Quiz basariyla $sinif_quiz-$sube_quiz sinifina eklenmistir.');</script>";
+                    } else {
+                        echo "<script type='text/javascript'>alert('Quiz eklenemedi. Lutfen tekrar deneyiniz.');</script>";
+                    }
                 }
-              }
-              echo '<script>window.location.href = "teacher.php";</script>';
-           }
+                echo '<script>window.location.href = "teacher.php";</script>';
+            }
         }
         mysqli_free_result($result_quiz);
         mysqli_close($connection_quiz);
     ?>
+
+<!---**********************************************Body Page Content Begins ------------------------------------------------------------------------------------------------------------------------->
+
     <body>
         <div class="wrapper">
             <!-- Sidebar Holder -->
@@ -110,6 +101,7 @@
                 </div>
                 <ul class="list-unstyled components">
                   <p>Ogretmen Anasayfa</p>
+
 <!---**********************************************'Duyurular' Content Begins ------------------------------------------------------------------------------------------------------------------------->
 
                   <button class="announcementbtn" onclick="document.getElementById('addAnnouncement').style.display='block'" style="width:auto;">Duyuru +</button>
@@ -150,8 +142,7 @@
                                 while ($row_log = mysqli_fetch_row($result)) {
                                     $sinif_adi = $row_log[0];
                                     $sube_adi = $row_log[1];
-                                    $sinif_sube = $sinif_adi."-".$sube_adi;
-                                    ?>
+                                    $sinif_sube = $sinif_adi."-".$sube_adi; ?>
                                     <li><a href="#" onclick="showHomeworkField(<?php echo $current_OgretmenId; ?>)" class="odev" id="<?php echo $sinif_adi."-".$sube_adi; ?>" name="<?php echo $sube_adi; ?>"><?php echo $sinif_adi."-".$sube_adi; ?></a></li>
                                     <?php
                                 }
@@ -172,6 +163,7 @@
                     </li>
 
 <!---**********************************************'Quizler' Content Begins ------------------------------------------------------------------------------------------------------------------------->
+
                    <li>
                         <a href="#Quiz" onclick="showQuizField(<?php echo $current_OgretmenId; ?>)">Quizler</a>
                         <script>
@@ -192,6 +184,7 @@
                         }
                         </script>
                    </li>
+                   
 <!---**********************************************'Notlar' Content Begins ------------------------------------------------------------------------------------------------------------------------->
 
                     <li class="active">
@@ -224,8 +217,7 @@
                                   while ($row_log = mysqli_fetch_row($result)) {
                                       $sinif_adi = $row_log[0];
                                       $sube_adi = $row_log[1];
-                                      $sinif_sube = $sinif_adi."-".$sube_adi;
-                                      ?>
+                                      $sinif_sube = $sinif_adi."-".$sube_adi; ?>
                                       <li><a href="#" onclick="showNoteField(<?php echo $current_OgretmenId; ?>)" class="not" id="<?php echo $sinif_adi."-".$sube_adi; ?>" name="<?php echo $sube_adi; ?>"><?php echo $sinif_adi."-".$sube_adi; ?></a></li>
                                       <?php
                                   }
@@ -260,7 +252,8 @@
 
             </nav>
 
-            <!-- Page Content Holder -->
+<!--********************************************** Page Content Holder ********************************************************************************************************************************-->
+
             <div id="content">
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
@@ -282,6 +275,8 @@
                     </div>
                 </nav>
                 <div id="teacherContent"></div>
+
+<!--********************************************** 'Duyuru ekleme' Content Holder ********************************************************************************************************************************-->
 
                 <div id="addAnnouncement" class="modal">
                 <form class="modal-content animate" action="addAnnouncement.php">
@@ -374,6 +369,8 @@
 
     </body>
 </html>
+
+<!--********************************************** 'Sifre degistir' modal content ********************************************************************************************************************************-->
 
 <div id='sifre_degistir_Modal' class='modal fade'>
   <div class='modal-dialog'>
