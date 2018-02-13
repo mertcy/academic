@@ -12,7 +12,6 @@
         <!-- Scrollbar Custom CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
         <!-- addAnnouncement Custom CSS -->
-        <link rel="stylesheet" type="text/css" href="/src/css/addAnnouncement.css">
     </head>
 
 <!---**********************************************Header Content Begins ------------------------------------------------------------------------------------------------------------------------->
@@ -137,10 +136,26 @@ mysqli_close($connection_gezi);
 
 <!---**********************************************'Duyurular' Content Begins ------------------------------------------------------------------------------------------------------------------------->
 
-                  <button class="announcementbtn" onclick="document.getElementById('addAnnouncement').style.display='block'" style="width:auto;">Duyuru +</button>
-
                   <li>
-                      <a href="#">Duyurular</a>
+                      <a href="#Duyurular" onclick="showAnnouncements(<?php echo $current_OgretmenId; ?>)">Duyurular</a>
+                      <script>
+                      function showAnnouncements(ogretmen_url) {
+
+                        if (window.XMLHttpRequest) {
+                          // code for IE7+, Firefox, Chrome, Opera, Safari
+                          xmlhttp=new XMLHttpRequest();
+                        } else { // code for IE6, IE5
+                          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.onreadystatechange=function() {
+                          if (this.readyState==4 && this.status==200) {
+                            document.getElementById("teacherContent").innerHTML=this.responseText;
+                          }
+                        }
+                        xmlhttp.open("GET","teacher_announcement.php?q="+ogretmen_url,true);
+                        xmlhttp.send();
+                      }
+                      </script>
                   </li>
 
 <!---**********************************************'Odevler' Content Begins ------------------------------------------------------------------------------------------------------------------------->
@@ -326,86 +341,11 @@ mysqli_close($connection_gezi);
                 </nav>
                 <div id="teacherContent"></div>
 
-<!--********************************************** 'Duyuru ekleme' Content Holder ********************************************************************************************************************************-->
+                </ul>
 
-                <div id="addAnnouncement" class="modal">
-                <form class="modal-content animate" action="addAnnouncement.php">
-                  <div class="imgcontainer">
-                    <span onclick="document.getElementById('addAnnouncement').style.display='none'" class="close" title="Vazgeç">&times;</span>
-                    <h2>Duyuru Ekleme</h2>
-                    <hr>
-                  </div>
-
-                  <div class="info">
-                        <label><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sinif: </b><select name="sinif_id" required>
-                            <option value="" disabled selected>--</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                          </select>
-                        </label>
-
-                        <label><b>&nbsp;&nbsp;&nbsp;Sube: </b><select name="sube_id" required>
-                            <option value="" disabled selected>--</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                          </select>
-                        </label>
-
-                        <label><b>&nbsp;&nbsp;&nbsp;Duyuru: </b><select name="duyuru_tipi" required>
-                            <option value="" disabled selected>--</option>
-                            <option value="odev">Odev</option>
-                            <option value="quiz">Quiz</option>
-                            <option value="sinav">Sinav</option>
-                            <option value="dokuman">Dokuman</option>
-                            <option value="toplanti">Toplanti</option>
-                            <option value="etkinlik">Etkinlik</option>
-                          </select>
-                        </label>
-
-                        <label><b>&nbsp;&nbsp;&nbsp;İlgili: </b>
-                            <input type="checkbox" checked="checked" disabled> Veli </input>
-                            <input type="checkbox" id="ilgili"> Ogrenci </input>
-                        </label>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button type="submit" class="submitbtn" title="Onayla">✔</button>
-
-                    </div>
-                    <hr>
-                    <br>
-                    <div class="announcementInfo">
-                      <label><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Baslik: </b><input type="text" placeholder="Baslik giriniz.." name="baslik" maxlength="137" style="width: 700px; height: 20px" required>
-                      </label>
-                      <br>
-                      <label><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Icerik: </label>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <textarea placeholder="Icerik giriniz.." name="icerik" rows="7" cols="17" maxlength="255" style="overflow-y: auto; width: 700px; height: 100px" required></textarea>
-                      </label>
+            </nav>
 
 
-                  </div>
-
-                </form>
-
-                </div>
-
-                <script>
-                // Get the modal
-                var modal = document.getElementById('addAnnouncement');
-
-                // When the user clicks anywhere outside of the modal, close it
-                window.onclick = function(event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                }
-                </script>
 
               </div>
         </div>
