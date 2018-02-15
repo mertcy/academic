@@ -113,7 +113,24 @@
                       </script>
                     </li>
                     <li>
-                        <a href="#">Iletisim</a>
+                      <a href="#Iletisim" onclick="showIletisim(<?php echo $current_parentID; ?>)">Iletisim</a>
+                      <script>
+                      function showIletisim(veli_url) {
+                        if (window.XMLHttpRequest) {
+                          // code for IE7+, Firefox, Chrome, Opera, Safari
+                          xmlhttp=new XMLHttpRequest();
+                        } else { // code for IE6, IE5
+                          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.onreadystatechange=function() {
+                          if (this.readyState==4 && this.status==200) {
+                            document.getElementById("include").innerHTML=this.responseText;
+                          }
+                        }
+                        xmlhttp.open("GET","parent_iletisim.php?q="+veli_url,true);
+                        xmlhttp.send();
+                      }
+                      </script>
                     </li>
                 </ul>
             </nav>

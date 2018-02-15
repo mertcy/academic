@@ -108,3 +108,5 @@ INSERT INTO `sinif_ders_programi` (`sinif_id`, `sube_id`, `ders_id`, `ders_zaman
 UPDATE `Ders` SET `ders_adi` = 'FenBilgisi' WHERE `Ders`.`ders_id` = 4;
 
 UPDATE `Ders` SET `ders_adi` = 'BedenEgitimi' WHERE `Ders`.`ders_id` = 7;
+
+INSERT INTO Iletisim VALUES (3, 3125547, 245, 'deneme@gmail.com');

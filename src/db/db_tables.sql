@@ -294,3 +294,12 @@ CREATE TABLE Etkinlik (
 
     PRIMARY KEY (etkinlik_id, duyuru_tipi, sinif_id, sube_id, etkinlik_tipi, etkinlik_no)
 );
+
+CREATE TABLE Iletisim (
+    ogretmen_id INT UNSIGNED NOT NULL,
+    tel_num INT NOT NULL,
+    ofis_num INT NOT NULL,
+    mail_adresi VARCHAR(55),
+
+    PRIMARY KEY (ogretmen_id)
+);
