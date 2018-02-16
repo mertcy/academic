@@ -19,18 +19,32 @@ th {text-align: left;}
 
   <?php
     session_start(); // start the session
-    $current_ogrenciId = $_SESSION['user_id'];
-
+    $current_veliId = $_SESSION['user_id'];
     $connection = mysqli_connect('localhost','root','root','db_academic','8889','/Applications/MAMP/tmp/mysql/mysql.sock');
 
     if($connection) {
-  ?>
+        $sql_ogr = "SELECT o.ogrenci_id FROM Ogrenci AS o, Veli AS v
+                    WHERE v.veli_id = $current_veliId AND v.ogrenci_id = o.ogrenci_id;";
+
+        $result_ogr = mysqli_query($connection, $sql_ogr);
+
+        while($row_ogr = mysqli_fetch_row($result_ogr)) {
+            $current_ogrenciId = $row_ogr[0];
+
+            $sql_kisi = "SELECT k.kisi_adi, k.kisi_soyadi FROM Kisi AS k
+                        WHERE k.kisi_id = $current_ogrenciId;";
+            $result_kisi = mysqli_query($connection, $sql_kisi);
+            while($row_kisi = mysqli_fetch_row($result_kisi)) {
+
+      ?>
+      <li>
+        <h3>Ogrenci: <?php echo $row_kisi[0] . ' ' . $row_kisi[1]; mysqli_free_result($result); ?> </h3>
+
         <h2>Genel</h2>
         <div class="line">
         <p>
             <?php
-              $announcement_code = 0;
-              INCLUDE('student_announcementSql.php');
+              INCLUDE('parent_announcementSql.php');
               $sql_log = $sql . $announcement_code . ";";
               $result = mysqli_query($connection, $sql_log);
 
@@ -53,7 +67,7 @@ th {text-align: left;}
     <p>
         <?php
           $announcement_code = 1;
-          INCLUDE('student_announcementSql.php');
+          INCLUDE('parent_announcementSql.php');
           $sql_log = $sql . $announcement_code . ";";
           $result = mysqli_query($connection, $sql_log);
 
@@ -76,7 +90,7 @@ th {text-align: left;}
     <p>
         <?php
           $announcement_code = 2;
-          INCLUDE('student_announcementSql.php');
+          INCLUDE('parent_announcementSql.php');
           $sql_log = $sql . $announcement_code . ";";
           $result = mysqli_query($connection, $sql_log);
 
@@ -99,7 +113,7 @@ th {text-align: left;}
     <p>
         <?php
           $announcement_code = 3;
-          INCLUDE('student_announcementSql.php');
+          INCLUDE('parent_announcementSql.php');
           $sql_log = $sql . $announcement_code . ";";
           $result = mysqli_query($connection, $sql_log);
 
@@ -122,7 +136,7 @@ th {text-align: left;}
     <p>
         <?php
           $announcement_code = 4;
-          INCLUDE('student_announcementSql.php');
+          INCLUDE('parent_announcementSql.php');
           $sql_log = $sql . $announcement_code . ";";
           $result = mysqli_query($connection, $sql_log);
 
@@ -145,7 +159,7 @@ th {text-align: left;}
     <p>
         <?php
           $announcement_code = 5;
-          INCLUDE('student_announcementSql.php');
+          INCLUDE('parent_announcementSql.php');
           $sql_log = $sql . $announcement_code . ";";
           $result = mysqli_query($connection, $sql_log);
 
@@ -168,7 +182,7 @@ th {text-align: left;}
     <p>
         <?php
           $announcement_code = 6;
-          INCLUDE('student_announcementSql.php');
+          INCLUDE('parent_announcementSql.php');
           $sql_log = $sql . $announcement_code . ";";
           $result = mysqli_query($connection, $sql_log);
 
@@ -192,7 +206,7 @@ th {text-align: left;}
     <p>
         <?php
           $announcement_code = 7;
-          INCLUDE('student_announcementSql.php');
+          INCLUDE('parent_announcementSql.php');
           $sql_log = $sql . $announcement_code . ";";
           $result = mysqli_query($connection, $sql_log);
 
@@ -207,6 +221,12 @@ th {text-align: left;}
         <?php
           }
           mysqli_free_result($result);
+        }
+          mysqli_free_result($result_kisi);
+        }
+          mysqli_free_result($result_ogr);
+
+
         ?>
     </p>
 

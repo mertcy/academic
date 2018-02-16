@@ -80,7 +80,25 @@
                 <ul class="list-unstyled components">
                     <p>Veli Anasayfa</p>
                     <li>
-                        <a href="#">Duyurular</a>
+                        <a href="#" onclick="showAnnouncements(<?php echo $current_parentId; ?>)">Duyurular</a>
+                        <script>
+                        function showAnnouncements(parent_url) {
+
+                          if (window.XMLHttpRequest) {
+                            // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                          } else { // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                          }
+                          xmlhttp.onreadystatechange=function() {
+                            if (this.readyState==4 && this.status==200) {
+                              document.getElementById("parentContent").innerHTML=this.responseText;
+                            }
+                          }
+                          xmlhttp.open("GET","parent_announcement.php?q="+parent_url,true);
+                          xmlhttp.send();
+                        }
+                        </script>
                     </li>
                     <li>
                         <a href="#">Toplanti</a>
@@ -158,7 +176,7 @@
                     </div>
                 </nav>
 
-                   <div id="include"></div>
+                    <div id="parentContent"><b></b></div>
 
               </div>
         </div>
