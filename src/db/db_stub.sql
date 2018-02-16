@@ -110,3 +110,27 @@ UPDATE `Ders` SET `ders_adi` = 'FenBilgisi' WHERE `Ders`.`ders_id` = 4;
 UPDATE `Ders` SET `ders_adi` = 'BedenEgitimi' WHERE `Ders`.`ders_id` = 7;
 
 INSERT INTO Iletisim VALUES (3, 3125547, 245, 'deneme@gmail.com');
+
+INSERT INTO `Kullanici` (`kullanici_id`, `kullanici_tipi`, `kullanici_parolasi`) VALUES (NULL, '0', 'ahmet');
+INSERT INTO `Kullanici` (`kullanici_id`, `kullanici_tipi`, `kullanici_parolasi`) VALUES (NULL, '0', 'arda');
+INSERT INTO `Kullanici` (`kullanici_id`, `kullanici_tipi`, `kullanici_parolasi`) VALUES (NULL, '0', 'fatih');
+INSERT INTO `Kullanici` (`kullanici_id`, `kullanici_tipi`, `kullanici_parolasi`) VALUES (NULL, '0', 'muhammed');
+INSERT INTO `Kullanici` (`kullanici_id`, `kullanici_tipi`, `kullanici_parolasi`) VALUES (NULL, '0', 'rabia');
+INSERT INTO `Kullanici` (`kullanici_id`, `kullanici_tipi`, `kullanici_parolasi`) VALUES (NULL, '0', 'ekin');
+INSERT INTO `Kullanici` (`kullanici_id`, `kullanici_tipi`, `kullanici_parolasi`) VALUES (NULL, '0', 'nursel');
+
+INSERT INTO `Kisi` (`kisi_id`, `kisi_adi`, `kisi_soyadi`, `kisi_dogumTarihi`, `kisi_adresi`, `kisi_cinsiyeti`) VALUES ('5', 'Ahmet Selim', 'Kaya', '1995-02-13', 'ANKARA', 'E');
+INSERT INTO `Kisi` (`kisi_id`, `kisi_adi`, `kisi_soyadi`, `kisi_dogumTarihi`, `kisi_adresi`, `kisi_cinsiyeti`) VALUES ('6', 'Arda', 'Eyüpoğlu', '1995-02-13', 'ANKARA', 'E');
+INSERT INTO `Kisi` (`kisi_id`, `kisi_adi`, `kisi_soyadi`, `kisi_dogumTarihi`, `kisi_adresi`, `kisi_cinsiyeti`) VALUES ('7', 'Fatih Erdem', 'Kızılkaya', '1995-02-13', 'ANKARA', 'E');
+INSERT INTO `Kisi` (`kisi_id`, `kisi_adi`, `kisi_soyadi`, `kisi_dogumTarihi`, `kisi_adresi`, `kisi_cinsiyeti`) VALUES ('8', 'Muhammed Ertuğrul', 'Güngör', '1995-02-13', 'ANKARA', 'E');
+INSERT INTO `Kisi` (`kisi_id`, `kisi_adi`, `kisi_soyadi`, `kisi_dogumTarihi`, `kisi_adresi`, `kisi_cinsiyeti`) VALUES ('9', 'Rabia', 'Özkan', '1995-02-13', 'ANKARA', 'K');
+INSERT INTO `Kisi` (`kisi_id`, `kisi_adi`, `kisi_soyadi`, `kisi_dogumTarihi`, `kisi_adresi`, `kisi_cinsiyeti`) VALUES ('10', 'Ekin Mert ', 'Temizkan', '1995-02-13', 'ANKARA', 'E');
+INSERT INTO `Kisi` (`kisi_id`, `kisi_adi`, `kisi_soyadi`, `kisi_dogumTarihi`, `kisi_adresi`, `kisi_cinsiyeti`) VALUES ('11', 'Nursel ', 'Toplar', '1995-02-13', 'ANKARA', 'K');
+
+INSERT INTO `Ogrenci` (`ogrenci_id`, `sinif_id`, `sube_id`) VALUES ('5', '6', 'C');
+INSERT INTO `Ogrenci` (`ogrenci_id`, `sinif_id`, `sube_id`) VALUES ('6', '6', 'C');
+INSERT INTO `Ogrenci` (`ogrenci_id`, `sinif_id`, `sube_id`) VALUES ('7', '6', 'C');
+INSERT INTO `Ogrenci` (`ogrenci_id`, `sinif_id`, `sube_id`) VALUES ('8', '7', 'B');
+INSERT INTO `Ogrenci` (`ogrenci_id`, `sinif_id`, `sube_id`) VALUES ('9', '7', 'B');
+INSERT INTO `Ogrenci` (`ogrenci_id`, `sinif_id`, `sube_id`) VALUES ('10', '7', 'B');
+INSERT INTO `Ogrenci` (`ogrenci_id`, `sinif_id`, `sube_id`) VALUES ('11', '7', 'B');
