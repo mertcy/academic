@@ -120,6 +120,39 @@ if ($connection_gezi) {
 }
 mysqli_free_result($result_gezi);
 mysqli_close($connection_gezi);
+
+//********************************************** teacher_announcement.php page form modal functions ********************************************************************************************
+
+session_start();
+date_default_timezone_set('Europe/Istanbul');
+$connection_announcement = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+
+if (isset($_POST['sendAnnouncement'])) {
+  $sinif = $_POST['sinif_id'];
+  $sube = $_POST['sube_id'];
+  $duyuru = $_POST['duyuru_id'];
+  $ilgili = $_POST['ilgili'];
+  $baslik = $_POST['baslik'];
+  $icerik = $_POST['icerik'];
+
+  $date = date("Y-m-d H:i:s");
+
+  if ($connection_announcement) {
+
+    $sql = "INSERT INTO Duyuru (sinif_id, sube_id, ilgili, duyuru_tipi,
+                                duyuru_basligi, duyuru_icerigi, duyuru_tarihi)
+            VALUES ('$sinif', '$sube', '$ilgili', '$duyuru', '$baslik', '$icerik', '$date')";
+
+    if (mysqli_query($connection_announcement, $sql)) {
+        echo "<script type='text/javascript'>alert('Duyuru başarıyla eklenmiştir.');</script>";
+    } else {
+        echo "<script type='text/javascript'>alert('Duyuru eklenemedi. Lütfen tekrar deneyiniz.');</script>";
+    }
+
+  }
+  mysqli_close($connection_announcement);
+}
+
 ?>
 
 <!---**********************************************Body Page Content Begins ------------------------------------------------------------------------------------------------------------------------->

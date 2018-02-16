@@ -15,11 +15,12 @@ table, td, th {
 th {text-align: left;}
 </style>
 </head>
-<body>
 
+<body>
   <div id="announcementAdd">
     <button name="send_announcement_button" id="send_announcement_button" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#announcement_modal">Duyuru+</button>
   </div>
+</body>
 
   <div id="announcement_modal" class="modal fade">
     <div class="modal-dialog">
@@ -31,45 +32,66 @@ th {text-align: left;}
         </div>
          <!-- Modal Body -->
         <div class="modal-body">
-          <form method='post' id='send_duyuru_ekle'>
+          <form method='post' id='send_announcement'>
 
             <div class="info">
-                  <label><b>Sinif: </b><select id="sinif_id" name="sinif_id" required>
-                      <option value="" disabled selected>--</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                    </select>
+
+              <label>
+                <b>Sinif: </b><select id="sinif_id" name="sinif_id" required>
+                  <option value="" disabled selected>--</option>
+                    <?php
+                      $connection_announcement = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+                      if ($connection_announcement) {
+                        $sql = "SELECT sinif_id FROM Sinif ORDER BY sinif_id ASC;";
+                        $result = mysqli_query($connection_announcement, $sql);
+                        while ($row = mysqli_fetch_row($result)) {
+                        ?>
+                          <option value="<?php echo $row[0]; ?>" <?php echo(isset($_POST['sinif_id'])&&($_POST['sinif_id']=='$row[0]')?' selected="selected"':'');?>><?php echo $row[0]; ?></options>
+                        <?php
+                        }
+
+                      ?></select>
                   </label>
 
                   <label><b>&nbsp;&nbsp;&nbsp;Sube: </b><select id="sube_id" name="sube_id" required>
                       <option value="" disabled selected>--</option>
-                      <option value="A">A</option>
-                      <option value="B">B</option>
-                      <option value="C">C</option>
-                      <option value="D">D</option>
+                      <?php
+                            $sql = "SELECT sube_id FROM Sinif ORDER BY sube_id";
+                            $result = mysqli_query($connection_announcement, $sql);
+                            while ($row = mysqli_fetch_row($result)) {
+                              ?>
+                              <option value="<?php echo $row[0]; ?>" <?php echo(isset($_POST['sube_id'])&&($_POST['sube_id']=='$row[0]')?' selected="selected"':'');?>><?php echo $row[0]; ?></options>
+                            <?php
+                          }
+                        }
+                        mysqli_free_result($result);
+                        mysqli_close($connection_announcement);
+
+                      ?>
                     </select>
                   </label>
 
-                  <label><b>&nbsp;&nbsp;&nbsp;Duyuru: </b><select id="duyuru_id" name="duyuru_tipi" required>
+                  <label><b>&nbsp;&nbsp;&nbsp;Duyuru: </b><select id="duyuru_id" name="duyuru_id" required>
                       <option value="" disabled selected>--</option>
-                      <option value="odev">Odev</option>
-                      <option value="quiz">Quiz</option>
-                      <option value="sinav">Sinav</option>
-                      <option value="dokuman">Dokuman</option>
-                      <option value="toplanti">Toplanti</option>
-                      <option value="etkinlik">Etkinlik</option>
+                      <option value="0" <?php echo(isset($_POST['duyuru_id'])&&($_POST['duyuru_id']=='0')?' selected="selected"':'');?>>Genel</options>
+                      <option value="1" <?php echo(isset($_POST['duyuru_id'])&&($_POST['duyuru_id']=='1')?' selected="selected"':'');?>>Sinav</options>
+                      <option value="2" <?php echo(isset($_POST['duyuru_id'])&&($_POST['duyuru_id']=='2')?' selected="selected"':'');?>>Odev</options>
+                      <option value="3" <?php echo(isset($_POST['duyuru_id'])&&($_POST['duyuru_id']=='3')?' selected="selected"':'');?>>Quiz</options>
+                      <option value="4" <?php echo(isset($_POST['duyuru_id'])&&($_POST['duyuru_id']=='4')?' selected="selected"':'');?>>Dokuman</options>
+                      <option value="5" <?php echo(isset($_POST['duyuru_id'])&&($_POST['duyuru_id']=='5')?' selected="selected"':'');?>>Etkinlik</options>
+                      <option value="6" <?php echo(isset($_POST['duyuru_id'])&&($_POST['duyuru_id']=='6')?' selected="selected"':'');?>>Gezi</options>
+                      <option value="7" <?php echo(isset($_POST['duyuru_id'])&&($_POST['duyuru_id']=='7')?' selected="selected"':'');?>>Toplanti</options>
                     </select>
                   </label>
 
                   <label><b>&nbsp;&nbsp;&nbsp;İlgili: </b>
-                      <input type="checkbox" checked="checked" disabled> Veli </input>
-                      <input type="checkbox" id="ilgili"> Ogrenci </input>
+                      <input type="checkbox" checked="checked" disabled title="İlgili duyuru veliye her türlü bildirilecektir."> Veli </input>
+                      <input type="checkbox" name="ilgili" id="ilgili" <?php echo(isset($_POST['checkbox']) ?' selected="selected" value="0"':'value="1"');?>> Ogrenci </input>
+
                   </label>
                   &nbsp;
 
-                  <input type="submit" id="duyuruGonder" name="duyuruGonder" value="✔" title="Onayla" class="btn btn-success" />
+                  <input type="submit" id="sendAnnouncement" name="sendAnnouncement" value="✔" title="Onayla" class="btn btn-success" />
               </div>
               <hr>
               <div class="announcementInfo">
@@ -82,7 +104,6 @@ th {text-align: left;}
                   <textarea placeholder="Icerik giriniz.." name="icerik" rows="7" cols="17" maxlength="255" style="overflow-y: auto; width: 570px; height: 100px" required></textarea>
                 </label>
 
-
             </div>
 
           </form>
@@ -91,27 +112,4 @@ th {text-align: left;}
     </div>
   </div>
 
-
-<?php
-  //********************************************** teacher_announcement.php page form modal functions ********************************************************************************************
-
-  session_start();
-  $connection_announcement = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
-  if ($connection_announcement) {
-      $control = 1;
-      if (isset($_POST['duyuruGonder'])) {
-
-          $sql = "INSERT INTO Duyuru (ders_id, sinif_id, sube_id, ilgili, duyuru_tipi, duyuru_basligi, duyuru_icerigi, duyuru_tarihi) VALUES (1, '" . $_POST['sinif_id'] . "', '" . $_POST['sube_id'] . "', '" . $_POST['ilgili'] . "', '" . $_POST['duyuru_id'] . "', '" . $_POST['baslik'] . "', '" .  $_POST['icerik'] . "', 2018-01-31);";
-
-          $result = mysqli_query($connection, $sql);
-
-      }
-  }
-  mysqli_free_result($result_announcement);
-  mysqli_close($connection_announcement);
-
-?>
-
-
-</body>
 </html>

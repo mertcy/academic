@@ -134,3 +134,21 @@ INSERT INTO `Ogrenci` (`ogrenci_id`, `sinif_id`, `sube_id`) VALUES ('8', '7', 'B
 INSERT INTO `Ogrenci` (`ogrenci_id`, `sinif_id`, `sube_id`) VALUES ('9', '7', 'B');
 INSERT INTO `Ogrenci` (`ogrenci_id`, `sinif_id`, `sube_id`) VALUES ('10', '7', 'B');
 INSERT INTO `Ogrenci` (`ogrenci_id`, `sinif_id`, `sube_id`) VALUES ('11', '7', 'B');
+
+DROP TABLE Duyuru;
+CREATE TABLE Duyuru (
+    duyuru_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    sinif_id INT UNSIGNED NOT NULL,
+    sube_id CHAR(1) NOT NULL,
+		ilgili SMALLINT UNSIGNED NOT NULL, /* 1: only parents will see, 0: both student and parent will see */
+    duyuru_tipi SMALLINT UNSIGNED NOT NULL,
+		/* 0: general, 1: exam, 2:homework, 3: quiz, 4: document, 5: activity, 6: trip, 7: meeting */
+    duyuru_basligi VARCHAR(137) NOT NULL,
+    duyuru_icerigi VARCHAR(255) NOT NULL,
+    duyuru_tarihi TIMESTAMP NOT NULL,
+
+    #FOREIGN KEY (sinif_id) REFERENCES Sinif(sinif_id),
+    #FOREIGN KEY (sube_id) REFERENCES Sinif(sube_id),
+
+    PRIMARY KEY (duyuru_id, sinif_id, sube_id)
+);
