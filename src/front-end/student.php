@@ -153,7 +153,28 @@
 
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Etkinliklerim</a>
                         <ul class="collapse list-unstyled" id="pageSubmenu">
-                            <li><a href="#">Gezilerim</a></li>
+                            <li>
+                              <a href="#Gezilerim" onclick="showClassTrips(<?php echo $current_ogrenciId; ?>)">Gezilerim</a>
+                              <script>
+                              function showClassTrips(ogrenci_url) {
+
+                                if (window.XMLHttpRequest) {
+                                  // code for IE7+, Firefox, Chrome, Opera, Safari
+                                  xmlhttp=new XMLHttpRequest();
+                                } else { // code for IE6, IE5
+                                  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                                }
+                                xmlhttp.onreadystatechange=function() {
+                                  if (this.readyState==4 && this.status==200) {
+                                    document.getElementById("studentContent").innerHTML=this.responseText;
+                                  }
+                                }
+                                xmlhttp.open("GET","student_classTrips.php?q="+ogrenci_url,true);
+                                xmlhttp.send();
+                              }
+                              </script>
+                            </li>
+
                             <li><a href="#">Kuluplerim</a></li>
                         </ul>
                     </li>
