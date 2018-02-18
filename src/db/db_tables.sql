@@ -303,3 +303,12 @@ CREATE TABLE Iletisim (
 
     PRIMARY KEY (ogretmen_id)
 );
+
+CREATE TABLE geziler(
+    sinif_id INT(11),
+    sube_id VARCHAR(11),
+    gezi_basligi VARCHAR(100),
+    gezi_icerigi TEXT ,
+    gezi_tarihi DATE,
+
+);

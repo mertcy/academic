@@ -5,9 +5,23 @@
   <div id="gezi">
     <button name="send_gezi_button" id="send_gezi_button" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#gezi_modal">Gezi Gönder</button>
   </div>
-</body>
+  </body>
 
-
+<?php
+  $connection_geziler = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+if($connection_geziler){
+  $sql_geziler =  "SELECT gezi.sinif_id, gezi.sube_id, gezi.gezi_basligi FROM geziler AS gezi";
+  $result = mysqli_query(  $connection_geziler, $sql_geziler);
+        while($row = mysqli_fetch_row($result)){
+?>
+        <p><?php echo $row[0];?>-<?php echo $row[1];?> Sınıfına <?php echo $row[2];?> Gezisi Eklenmiştir.</p>
+          <?php
+        }
+        mysqli_free_result($result);
+      ?>
+          <?php
+}
+  ?>
 <div id="gezi_modal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">

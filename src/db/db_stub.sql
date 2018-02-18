@@ -1,4 +1,4 @@
-INSERT INTO Kullanici VALUES (1, 0, 'kerem');
+﻿INSERT INTO Kullanici VALUES (1, 0, 'kerem');
 INSERT INTO Kullanici (kullanici_tipi, kullanici_parolasi) VALUES (1, 'ogulcan');
 INSERT INTO Kullanici (kullanici_tipi, kullanici_parolasi) VALUES (2, 'oguzmert');
 INSERT INTO Kullanici (kullanici_tipi, kullanici_parolasi) VALUES (0, 'burak');
@@ -152,3 +152,6 @@ CREATE TABLE Duyuru (
 
     PRIMARY KEY (duyuru_id, sinif_id, sube_id)
 );
+
+INSERT INTO `geziler` (`sinif_id`, `sube_id`, `gezi_basligi`, `gezi_icerigi`, `gezi_tarihi`) VALUES ('6', 'C', 'Anitkabir', 'Anitkabire gidilecek', '2018-02-08');
+
