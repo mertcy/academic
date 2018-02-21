@@ -58,6 +58,20 @@
 //********************************************** teacher_quiz.php page form modal functions ********************************************************************************************
 
         session_start();
+        $connection_dersID = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+        if($connection_dersID) {
+            $sql_log_dersID = "SELECT d.ders_id
+                               FROM Ders AS d, Ogretmen AS o
+                               WHERE d.ders_adi = o.brans AND o.ogretmen_id = $current_OgretmenId";
+            $result_dersID = mysqli_query($connection_dersID, $sql_log_dersID);
+
+            while($row_log_dersID = mysqli_fetch_row($result_dersID)) {
+                $ders_id_sql = $row_log_dersID[0];
+            }
+            mysqli_free_result($result_dersID);
+            mysqli_close($connection_dersID);
+        }
+
         $connection_quiz = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
         if ($connection_quiz) {
             $control = 1;
@@ -75,7 +89,7 @@
                     echo "<script type='text/javascript'>alert('Quiz linkini giriniz.');</script>";
                     $control = 0;
                 } elseif ($control == 1) {
-                    $sqlQuiz = "INSERT INTO `Quiz` (`quiz_id`, `ders_id`, `sinif_id`, `sube_id`, `duyuru_tipi`, `quiz_no`, `quiz_tarihi`, `notlandirma_tipi`, `not_yuzdesi`, `link`) VALUES ('', '', '$sinif_quiz', '$sube_quiz', '1', '', '2018-02-08', '5', '5', '$link_quiz')";
+                    $sqlQuiz = "INSERT INTO `Quiz` (`quiz_id`, `ders_id`, `sinif_id`, `sube_id`, `duyuru_tipi`, `quiz_no`, `quiz_tarihi`, `notlandirma_tipi`, `not_yuzdesi`, `link`) VALUES ('', '$ders_id_sql', '$sinif_quiz', '$sube_quiz', '1', '', '2018-02-08', '5', '5', '$link_quiz')";
                     if (mysqli_query($connection_quiz, $sqlQuiz)) {
                         echo "<script type='text/javascript'>alert('Quiz basariyla $sinif_quiz-$sube_quiz sinifina eklenmistir.');</script>";
                     } else {

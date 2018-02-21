@@ -40,7 +40,6 @@
 
         mysqli_free_result($result2);
         mysqli_close($connection2);
-        echo "$link";
     }
 ?>
         <script type="text/javascript" async defer src="https://d134jvmqfdbkyi.cloudfront.net/script/embed.min.js"></script>
