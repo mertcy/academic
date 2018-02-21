@@ -102,6 +102,17 @@
         mysqli_free_result($result_quiz);
         mysqli_close($connection_quiz);
 
+//********************************************** teacher_note.php page form modal functions ********************************************************************************************
+
+        session_start();
+        $connection_note = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+        if ($connection_note) {
+            // BURADA HER OGRENCI ICIN DATABASEDE BIRER TABLO OLUSTURUP 48 COLOMNLU TABLOLAR GEREKECEK,
+            // GEREKSIZ DB ISLERI OLDUGU ICIN FONKSIYON ASAMASI SUANLIK ASKIYA ALINMISTIR.
+        }
+        mysqli_free_result($result_quiz);
+        mysqli_close($connection_note);
+
 
 //********************************************** teacher_gezi.php page form modal functions ********************************************************************************************
 session_start();

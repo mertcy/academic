@@ -13,9 +13,12 @@
     $sinif_note = substr("$sinif_sube_id", -3,1);
 ?>
 
-    <h4><?php echo $sinif_sube_id;?> sınıfınızın öğrencilerinin notlarını girmek için aşağıdaki alanı kullanın. </h4>
-    <br><br/>
+    <h4><?php echo $sinif_sube_id;?> sınıfınızın öğrencilerinin notlarının giriş ekranı </h4>
+    <br></br>
+    <h5>Tüm öğrencilerin notlarını aşağıdaki tabloya girdikten sonra aşağıdaki 'Onayla' butonuna basarak notları girdiğinizden emin olun.</h5>
 
+    <td><input type="submit" id="gonder_note" name="gonder_note" value="Onayla" class="btn btn-info"/></td>
+    <br></br>
     <table id="notes" class="display" cellspacing="0" width="100%">
     <thead>
         <tr>
