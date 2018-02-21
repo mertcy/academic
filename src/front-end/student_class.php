@@ -4,8 +4,6 @@
 
     $ders_id = $_COOKIE['ders_id'];
     $current_ogrenciId = $_SESSION['user_id'];
-    $sinif_id = $_SESSION['sinif_id'];
-    $sube_id = $_SESSION['sube_id'];
 
     $connection = mysqli_connect('localhost','root','root','db_academic','8889','/Applications/MAMP/tmp/mysql/mysql.sock');
 
@@ -18,11 +16,38 @@
         }
 
         mysqli_free_result($result);
+
+        $sql_log = "SELECT sinif_id, sube_id FROM Ogrenci WHERE ogrenci_id = $current_ogrenciId";
+        $result = mysqli_query($connection, $sql_log);
+
+        while($row_log = mysqli_fetch_row($result)) {
+            $sinif_id = $row_log[0];
+            $sube_id = $row_log[1];
+        }
+
+        mysqli_free_result($result);
+
         mysqli_close($connection);
         ?>
-        <h3><?php echo $ders_adi; ?></h3>
-        <br></br>
-        <h4>Dersin quizi:</h4>
+        <h3><?php echo $ders_adi; ?></h3><hr><hr>
+
+        <h4>Dersin odevi:</h4>
+        <?php
+            // remove whitespace from course name
+            $ders_adi = preg_replace('/\s+/', '', $ders_adi);
+
+            // get a list of file paths using the glob function.
+            $path = 'homeworks/'. $sinif_id . '-' . $sube_id .'/' . $ders_adi . '/*';
+            $fileList = glob($path);
+
+            // loop through the array that glob returned.
+            foreach($fileList as $filename){
+               //Simply print them out onto the screen.
+               echo "<a href=$filename>".basename($filename)."</a><br></br>";
+            }
+        ?>
+
+        <hr><h4>Dersin quizi:</h4>
         <?php
     }
 
