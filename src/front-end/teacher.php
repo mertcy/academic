@@ -345,9 +345,26 @@ if (isset($_POST['sendAnnouncement'])) {
 
 <!---**********************************************'Toplantilar' Content Begins ------------------------------------------------------------------------------------------------------------------------->
 
-                    <li>
-                        <a href="#">Toplantilar</a>
-                    </li>
+              <li>
+                <a href="#Toplanti" onclick="showMeetingField(<?php echo $current_OgretmenId; ?>)">Toplantilar</a>
+                <script>
+                function showMeetingField(ogretmen_url) {
+                  if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+                  } else { // code for IE6, IE5
+                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                  }
+                  xmlhttp.onreadystatechange=function() {
+                    if (this.readyState==4 && this.status==200) {
+                      document.getElementById("teacherContent").innerHTML=this.responseText;
+                    }
+                  }
+                  xmlhttp.open("GET","teacher_meeting.php?q="+ogretmen_url,true);
+                  xmlhttp.send();
+                }
+                </script>
+              </li>
 
 <!---**********************************************'Geziler' Content Begins ------------------------------------------------------------------------------------------------------------------------->
 
