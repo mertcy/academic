@@ -16,11 +16,30 @@ th {text-align: left;}
 </style>
 </head>
 
+<h2> Duyuru ekleme alanı </h2>
+<br></br>
+
+
 <body>
   <div id="announcementAdd">
-    <button name="send_announcement_button" id="send_announcement_button" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#announcement_modal">Duyuru+</button>
+    <button name="send_announcement_button" id="send_announcement_button" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#announcement_modal">Duyuru Ekle</button>
   </div>
 </body>
+
+<br></br>
+<h4> Mevcut eklemiş olduğunuz duyurularınız:</h4>
+<?php
+    $connection_toplanti = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+    if($connection_toplanti){
+      $sql_toplanti =  "SELECT d.sinif_id, d.sube_id, d.duyuru_basligi, d.duyuru_tarihi FROM Duyuru AS d";
+      $result = mysqli_query($connection_toplanti, $sql_toplanti);
+      while($row = mysqli_fetch_row($result)){ ?>
+        <p><?php echo $row[3];?> tarihinde <?php echo $row[0]."-".$row[1];?> sınıfı öğrenci ve velilerine '<?php echo $row[2];?>' başlıklı duyuru eklediniz.</p>
+        <?php
+      }
+      mysqli_free_result($result);
+    }
+?>
 
   <div id="announcement_modal" class="modal fade">
     <div class="modal-dialog">
