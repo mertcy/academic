@@ -74,21 +74,21 @@
 
         $connection_quiz = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
         if ($connection_quiz) {
-            $control = 1;
+            $control_quiz = 1;
             if (isset($_POST['gonder'])) {
                 $sinif_quiz = $_POST['sinif_quiz'];
                 $sube_quiz = $_POST['sube_quiz'];
                 $link_quiz = $_POST['quizlink'];
                 if ($sinif_quiz == "" || $sinif_quiz < 1 || $sinif_quiz > 12) {
                     echo "<script type='text/javascript'>alert('Sinifi yanlis girdiniz. Lutfen tekrar deneyin.');</script>";
-                    $control = 0;
+                    $control_quiz = 0;
                 } elseif ($sube_quiz == "" || strlen($sube_quiz) > 1) {
                     echo "<script type='text/javascript'>alert('Subeyi yanlis girdiniz. Lutfen tekrar deneyin.');</script>";
-                    $control = 0;
+                    $control_quiz = 0;
                 } elseif ($link_quiz == "") {
                     echo "<script type='text/javascript'>alert('Quiz linkini giriniz.');</script>";
-                    $control = 0;
-                } elseif ($control == 1) {
+                    $control_quiz = 0;
+                } elseif ($control_quiz == 1) {
                     $sqlQuiz = "INSERT INTO `Quiz` (`quiz_id`, `ders_id`, `sinif_id`, `sube_id`, `duyuru_tipi`, `quiz_no`, `quiz_tarihi`, `notlandirma_tipi`, `not_yuzdesi`, `link`) VALUES ('', '$ders_id_sql', '$sinif_quiz', '$sube_quiz', '1', '', '2018-02-08', '5', '5', '$link_quiz')";
                     if (mysqli_query($connection_quiz, $sqlQuiz)) {
                         echo "<script type='text/javascript'>alert('Quiz basariyla $sinif_quiz-$sube_quiz sinifina eklenmistir.');</script>";
@@ -113,6 +113,38 @@
         mysqli_free_result($result_quiz);
         mysqli_close($connection_note);
 
+
+//********************************************** teacher_meeting.php page form modal functions ********************************************************************************************
+        session_start();
+        $connection_toplanti = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+        if ($connection_toplanti) {
+            $control_meeting = 1;
+            if (isset($_POST['toplanti_gonder'])) {
+                $toplanti_tarihi = $_POST['toplanti_tarihi'];
+                $toplanti_sinif = $_POST['sinif_toplanti'];
+                $toplanti_sube = $_POST['sube_toplanti'];
+                $toplanti_baslik = $_POST['toplanti_baslik'];
+                $toplanti_icerik = $_POST['toplanti_icerik'];
+
+                if ($toplanti_sinif == "" || $toplanti_sinif < 1 || $toplanti_sinif > 12) {
+                    echo "<script type='text/javascript'>alert('Sinifi yanlis girdiniz. Lutfen tekrar deneyin.');</script>";
+                    $control_meeting = 0;
+                } elseif ($toplanti_sube == "" || strlen($toplanti_sube) > 1) {
+                    echo "<script type='text/javascript'>alert('Subeyi yanlis girdiniz. Lutfen tekrar deneyin.');</script>";
+                    $control_meeting = 0;
+                }  elseif ($control_meeting == 1) {
+                    $sqlToplanti = "INSERT INTO `Toplanti` (`toplanti_id`, `duyuru_tipi`, `sinif_id`, `sube_id`, `toplanti_tipi`, `toplanti_no`, `toplanti_tarihi`, `katilim_durumu`, `toplanti_baslik`, `toplanti_icerik`) VALUES ('', '', '$toplanti_sinif', '$toplanti_sube', '', '', '$toplanti_tarihi', '', '$toplanti_baslik', '$toplanti_icerik')";
+                    if (mysqli_query($connection_toplanti, $sqlToplanti)) {
+                        echo "<script type='text/javascript'>alert('Toplantiniz basariyla $toplanti_sinif-$toplanti_sube sinifina eklenmistir.');</script>";
+                    } else {
+                        echo "<script type='text/javascript'>alert('Toplanti eklenemedi. Lutfen tekrar deneyiniz.');</script>";
+                    }
+                }
+                echo '<script>window.location.href = "teacher.php";</script>';
+            }
+        }
+        mysqli_free_result($result_toplanti);
+        mysqli_close($connection_toplanti);
 
 //********************************************** teacher_gezi.php page form modal functions ********************************************************************************************
 session_start();

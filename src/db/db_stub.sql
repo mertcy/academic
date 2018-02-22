@@ -155,3 +155,4 @@ CREATE TABLE Duyuru (
 
 INSERT INTO `geziler` (`sinif_id`, `sube_id`, `gezi_basligi`, `gezi_icerigi`, `gezi_tarihi`) VALUES ('6', 'C', 'Anitkabir', 'Anitkabire gidilecek', '2018-02-08');
 
+ALTER TABLE `Toplanti` ADD `toplanti_baslik` VARCHAR(25) NOT NULL AFTER `katilim_durumu`, ADD `toplanti_icerik` VARCHAR(200) NOT NULL AFTER `toplantı_baslik`;
