@@ -122,7 +122,7 @@
                         }
                         xmlhttp.onreadystatechange=function() {
                           if (this.readyState==4 && this.status==200) {
-                            document.getElementById("include").innerHTML=this.responseText;
+                            document.getElementById("parentContent").innerHTML=this.responseText;
                           }
                         }
                         xmlhttp.open("GET","parent_classSchedule.php?q="+ogrenci_url,true);
@@ -142,7 +142,7 @@
                         }
                         xmlhttp.onreadystatechange=function() {
                           if (this.readyState==4 && this.status==200) {
-                            document.getElementById("include").innerHTML=this.responseText;
+                            document.getElementById("parentContent").innerHTML=this.responseText;
                           }
                         }
                         xmlhttp.open("GET","parent_iletisim.php?q="+veli_url,true);
