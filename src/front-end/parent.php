@@ -141,7 +141,25 @@
                       </script>
                     </li>
                     <li>
-                        <a href="#">Not Dokumu</a>
+                      <a href="#NotDokumu" onclick="showGradesParent(<?php echo $current_ogrenciId; ?>)">Not Dokumu</a>
+                      <script>
+                      function showGradesParent(ogrenci_url) {
+
+                        if (window.XMLHttpRequest) {
+                          // code for IE7+, Firefox, Chrome, Opera, Safari
+                          xmlhttp=new XMLHttpRequest();
+                        } else { // code for IE6, IE5
+                          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.onreadystatechange=function() {
+                          if (this.readyState==4 && this.status==200) {
+                            document.getElementById("parentContent").innerHTML=this.responseText;
+                          }
+                        }
+                        xmlhttp.open("GET","parent_grades.php?q="+ogrenci_url,true);
+                        xmlhttp.send();
+                      }
+                      </script>
                     </li>
                     <li>
                       <a href="#DersProg" onclick="showClassSchedule(<?php echo $current_ogrenciId; ?>)">Ders Programi</a>
