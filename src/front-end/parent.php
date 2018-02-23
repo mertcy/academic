@@ -104,7 +104,24 @@
                         <a href="#">Toplanti</a>
                     </li>
                     <li>
-                        <a href="#">Gezi Onay</a>
+                      <a href="#Geziler" onclick="showGeziler(<?php echo $current_parentID; ?>)">Geziler</a>
+                      <script>
+                      function showGeziler(veli_url) {
+                        if (window.XMLHttpRequest) {
+                          // code for IE7+, Firefox, Chrome, Opera, Safari
+                          xmlhttp=new XMLHttpRequest();
+                        } else { // code for IE6, IE5
+                          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.onreadystatechange=function() {
+                          if (this.readyState==4 && this.status==200) {
+                            document.getElementById("parentContent").innerHTML=this.responseText;
+                          }
+                        }
+                        xmlhttp.open("GET","parent_classTrip.php?q="+veli_url,true);
+                        xmlhttp.send();
+                      }
+                      </script>
                     </li>
                     <li>
                         <a href="#">Not Dokumu</a>
