@@ -210,7 +210,85 @@ if (isset($_POST['sendAnnouncement'])) {
   mysqli_close($connection_announcement);
 }
 
+//********************************************** teacher_evaluation.php page functions ********************************************************************************************
+
+session_start();
+date_default_timezone_set('Europe/Istanbul');
+$connection_evaluation = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+
+if (isset($_POST['sendEvaluation'])) {
+  if ($connection_evaluation) {
+    $ders_id = 0;
+    $sql_dersID = "SELECT d.ders_id FROM Ders AS d, Ogretmen AS o
+                   WHERE d.ders_adi = o.brans AND o.ogretmen_id = $current_OgretmenId";
+    $result_dersID = mysqli_query($connection_evaluation, $sql_dersID);
+
+    while($row_dersID = mysqli_fetch_row($result_dersID)) {
+        $ders_id = $row_dersID[0];
+    }
+    mysqli_free_result($result_dersID);
+
+    $ogrenci_id = $_POST['ogrenci_id'];
+    $e1 = $_POST['e1'];
+    $e2 = $_POST['e2'];
+    $e3 = $_POST['e3'];
+    $e4 = $_POST['e4'];
+    $e5 = $_POST['e5'];
+    $e6 = $_POST['e6'];
+    $e7 = $_POST['e7'];
+    $e8 = $_POST['e8'];
+    $e9 = $_POST['e9'];
+    $e10 = $_POST['e10'];
+    $e11 = $_POST['e11'];
+
+    /*
+    $myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
+    $txt = $ders_id . "\n";
+    fwrite($myfile, $txt);
+    fclose($myfile);
+    */
+
+    $sql = "INSERT INTO Ogrenci_Degerlendirme (hafta_id, ogrenci_id, ders_id, degerlendirme_tipi, degerlendirme_puani)
+            VALUES (1, $ogrenci_id, $ders_id, 1, $e1)";
+    mysqli_query($connection_evaluation, $sql);
+    $sql = "INSERT INTO Ogrenci_Degerlendirme (hafta_id, ogrenci_id, ders_id, degerlendirme_tipi, degerlendirme_puani)
+            VALUES (1, $ogrenci_id, $ders_id, 2, $e2)";
+    mysqli_query($connection_evaluation, $sql);
+    $sql = "INSERT INTO Ogrenci_Degerlendirme (hafta_id, ogrenci_id, ders_id, degerlendirme_tipi, degerlendirme_puani)
+            VALUES (1, $ogrenci_id, $ders_id, 3, $e3)";
+    mysqli_query($connection_evaluation, $sql);
+    $sql = "INSERT INTO Ogrenci_Degerlendirme (hafta_id, ogrenci_id, ders_id, degerlendirme_tipi, degerlendirme_puani)
+            VALUES (1, $ogrenci_id, $ders_id, 4, $e4)";
+    mysqli_query($connection_evaluation, $sql);
+    $sql = "INSERT INTO Ogrenci_Degerlendirme (hafta_id, ogrenci_id, ders_id, degerlendirme_tipi, degerlendirme_puani)
+            VALUES (1, $ogrenci_id, $ders_id, 5, $e5)";
+    mysqli_query($connection_evaluation, $sql);
+    $sql = "INSERT INTO Ogrenci_Degerlendirme (hafta_id, ogrenci_id, ders_id, degerlendirme_tipi, degerlendirme_puani)
+            VALUES (1, $ogrenci_id, $ders_id, 6, $e6)";
+    mysqli_query($connection_evaluation, $sql);
+    $sql = "INSERT INTO Ogrenci_Degerlendirme (hafta_id, ogrenci_id, ders_id, degerlendirme_tipi, degerlendirme_puani)
+            VALUES (1, $ogrenci_id, $ders_id, 7, $e7)";
+    mysqli_query($connection_evaluation, $sql);
+    $sql = "INSERT INTO Ogrenci_Degerlendirme (hafta_id, ogrenci_id, ders_id, degerlendirme_tipi, degerlendirme_puani)
+            VALUES (1, $ogrenci_id, $ders_id, 8, $e8)";
+    mysqli_query($connection_evaluation, $sql);
+    $sql = "INSERT INTO Ogrenci_Degerlendirme (hafta_id, ogrenci_id, ders_id, degerlendirme_tipi, degerlendirme_puani)
+            VALUES (1, $ogrenci_id, $ders_id, 9, $e9)";
+    mysqli_query($connection_evaluation, $sql);
+    $sql = "INSERT INTO Ogrenci_Degerlendirme (hafta_id, ogrenci_id, ders_id, degerlendirme_tipi, degerlendirme_puani)
+            VALUES (1, $ogrenci_id, $ders_id, 10, $e10)";
+    mysqli_query($connection_evaluation, $sql);
+    $sql = "INSERT INTO Ogrenci_Degerlendirme (hafta_id, ogrenci_id, ders_id, degerlendirme_tipi, degerlendirme_puani)
+            VALUES (1, $ogrenci_id, $ders_id, 11, $e11)";
+    mysqli_query($connection_evaluation, $sql);
+
+  }
+
+  mysqli_close($connection_evaluation);
+}
+
 ?>
+
 
 <!---**********************************************Body Page Content Begins ------------------------------------------------------------------------------------------------------------------------->
 
@@ -375,6 +453,60 @@ if (isset($_POST['sendAnnouncement'])) {
                         </ul>
                       </li>
 
+<!---**********************************************'Ogrenci Degerlendirme' Content Begins ------------------------------------------------------------------------------------------------------------------------->
+
+<li class="active">
+      <a href="#Evaluation" data-toggle="collapse" aria-expanded="false">Öğrenci Değerlendirme</a>
+      <script>
+      function showEvaluationField(ogretmen_url) {
+        if (window.XMLHttpRequest) {
+          // code for IE7+, Firefox, Chrome, Opera, Safari
+          xmlhttp=new XMLHttpRequest();
+        } else { // code for IE6, IE5
+          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function() {
+          if (this.readyState==4 && this.status==200) {
+            document.getElementById("teacherContent").innerHTML=this.responseText;
+          }
+        }
+        xmlhttp.open("GET","teacher_evaluation.php?q="+ogretmen_url,true);
+        xmlhttp.send();
+      }
+      </script>
+      <ul class="collapse list-unstyled" id="Evaluation">
+        <?php
+          $connection = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+          if ($connection) {
+              $sql = "SELECT s.sinif_id, s.sube_id
+                      FROM Sinif AS s, Ogretmen AS o
+                      WHERE o.ogretmen_id = $current_OgretmenId AND o.ogretmen_id = s.ogretmen_id";
+              $result = mysqli_query($connection, $sql);
+              while ($row_log = mysqli_fetch_row($result)) {
+                  $sinif_adi = $row_log[0];
+                  $sube_adi = $row_log[1];
+                  $sinif_sube = $sinif_adi."-".$sube_adi; ?>
+                  <li><a href="#" onclick="showEvaluationField(<?php echo $current_OgretmenId; ?>)" class="evaluation" id="<?php echo $sinif_adi."-".$sube_adi; ?>" name="<?php echo $sube_adi; ?>"><?php echo $sinif_adi."-".$sube_adi; ?></a></li>
+                  <?php
+              }
+          }
+          mysqli_free_result($result);
+          mysqli_close($connection);
+      ?>
+      <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script>
+          $( ".evaluation" ).click(function() {
+            var sinif_id = this.id;
+            document.cookie = "sinif_sube_id=" + sinif_id + ";";
+            $("#teacherContent").load('teacher_evaluation.php');
+          });
+
+      </script>
+    </ul>
+  </li>
+
+
+
 <!---**********************************************'Toplantilar' Content Begins ------------------------------------------------------------------------------------------------------------------------->
 
               <li>
@@ -420,9 +552,8 @@ if (isset($_POST['sendAnnouncement'])) {
                 }
                 </script>
               </li>
-                </ul>
-
-            </nav>
+          </ul>
+      </nav>
 
 <!--********************************************** Page Content Holder ********************************************************************************************************************************-->
 

@@ -156,3 +156,16 @@ CREATE TABLE Duyuru (
 INSERT INTO `geziler` (`sinif_id`, `sube_id`, `gezi_basligi`, `gezi_icerigi`, `gezi_tarihi`) VALUES ('6', 'C', 'Anitkabir', 'Anitkabire gidilecek', '2018-02-08');
 
 ALTER TABLE `Toplanti` ADD `toplanti_baslik` VARCHAR(25) NOT NULL AFTER `katilim_durumu`, ADD `toplanti_icerik` VARCHAR(200) NOT NULL AFTER `toplanti_baslik`;
+
+CREATE TABLE Ogrenci_Degerlendirme (
+    hafta_id INT UNSIGNED NOT NULL,
+    ogrenci_id INT UNSIGNED NOT NULL,
+    ders_id INT UNSIGNED NOT NULL,
+    degerlendirme_tipi INT UNSIGNED NOT NULL,
+    degerlendirme_puani INT UNSIGNED NOT NULL,
+
+    PRIMARY KEY (hafta_id, ogrenci_id, ders_id, degerlendirme_tipi, degerlendirme_puani),
+);
+
+UPDATE `Ders` SET `ders_adi` = 'FenBilgisi' WHERE `Ders`.`ders_id` = 4;
+UPDATE `Ders` SET `ders_adi` = 'BedenEgitimi' WHERE `Ders`.`ders_id` = 7;
