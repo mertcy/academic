@@ -19,6 +19,8 @@ th {text-align: left;}
 <h2> Duyuru ekleme alanı </h2>
 <br></br>
 
+<p> Duyuru eklemek için ekleyeceğinizin duyuru tipini seçerek gerekli bilgileri doldurunuz. Duyurunun velinin yanısıra öğrencilere de ulaşmasını istiyorsanız, öğrencinin yanındaki tik işaretini seçin. </p>
+<br></br>
 
 <body>
   <div id="announcementAdd">

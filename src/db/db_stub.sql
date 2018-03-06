@@ -164,7 +164,7 @@ CREATE TABLE Ogrenci_Degerlendirme (
     degerlendirme_tipi INT UNSIGNED NOT NULL,
     degerlendirme_puani INT UNSIGNED NOT NULL,
 
-    PRIMARY KEY (hafta_id, ogrenci_id, ders_id, degerlendirme_tipi, degerlendirme_puani),
+    PRIMARY KEY (hafta_id, ogrenci_id, ders_id, degerlendirme_tipi, degerlendirme_puani)
 );
 
 UPDATE `Ders` SET `ders_adi` = 'FenBilgisi' WHERE `Ders`.`ders_id` = 4;

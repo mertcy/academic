@@ -2,6 +2,10 @@
 <html>
 <body>
 
+  <h2> Gezi izni oluşturma alanı </h2>
+  <br></br>
+  <p> Sınıf gezisi izni oluşturmak için aşağıdaki 'Gezi Gönder' butonunu kullanarak gezi ile ilgili gerekli bilgileri giriniz. Öğrencilerin velisine ulaşacak bu izin formunun dönüşlerine göre izin almış olan öğrenciler listeye eklenecektir.</p>
+  <br></br>
   <div id="gezi">
     <button name="send_gezi_button" id="send_gezi_button" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#gezi_modal">Gezi Gönder</button>
   </div>

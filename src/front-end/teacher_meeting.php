@@ -2,6 +2,12 @@
 <html>
 <body>
 
+<h2> Veli toplantısı oluşturma alanı </h2>
+<br></br>
+<p> Veli toplantısı oluşturmak için aşağıdaki 'Toplantı Oluştur' butonunu kullanarak, hangi tarihte hangi sınıf ile nerede toplantıyı yapacağınız bilgilerini girin.</p>
+<br></br>
+
+
 <div id="toplanti">
   <button name="send_toplanti_button" id="send_toplanti_button" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#toplanti_modal">Toplantı Oluştur</button>
 </div>
