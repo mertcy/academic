@@ -76,9 +76,11 @@
                 <div class="sidebar-header">
                     <h3>AcadeMic</h3>
                 </div>
-
                 <ul class="list-unstyled components">
                     <p>Veli Anasayfa</p>
+
+<!---**********************************************'Duyurular' Content Begins ------------------------------------------------------------------------------------------------------------------------->
+
                     <li>
                         <a href="#" onclick="showAnnouncements(<?php echo $current_parentId; ?>)">Duyurular</a>
                         <script>
@@ -100,6 +102,9 @@
                         }
                         </script>
                     </li>
+
+<!---**********************************************'Toplantilar' Content Begins ------------------------------------------------------------------------------------------------------------------------->
+
                     <li>
                       <a href="#Toplanti" onclick="showToplanti(<?php echo $current_parentID; ?>)">Toplantilar</a>
                       <script>
@@ -120,6 +125,9 @@
                       }
                       </script>
                     </li>
+
+<!---**********************************************'Geziler' Content Begins ------------------------------------------------------------------------------------------------------------------------->
+
                     <li>
                       <a href="#Geziler" onclick="showGeziler(<?php echo $current_parentID; ?>)">Geziler</a>
                       <script>
@@ -140,6 +148,9 @@
                       }
                       </script>
                     </li>
+
+<!---**********************************************'Not Dokumu' Content Begins ------------------------------------------------------------------------------------------------------------------------->
+
                     <li>
                       <a href="#NotDokumu" onclick="showGradesParent(<?php echo $current_ogrenciId; ?>)">Not Dokumu</a>
                       <script>
@@ -161,6 +172,9 @@
                       }
                       </script>
                     </li>
+
+<!---**********************************************'Ders Programi' Content Begins ------------------------------------------------------------------------------------------------------------------------->
+
                     <li>
                       <a href="#DersProg" onclick="showClassSchedule(<?php echo $current_ogrenciId; ?>)">Ders Programi</a>
                       <script>
@@ -182,30 +196,86 @@
                       }
                       </script>
                     </li>
-                    <li>
-                      <a href="#Iletisim" onclick="showIletisim(<?php echo $current_parentID; ?>)">Iletisim</a>
-                      <script>
-                      function showIletisim(veli_url) {
-                        if (window.XMLHttpRequest) {
-                          // code for IE7+, Firefox, Chrome, Opera, Safari
-                          xmlhttp=new XMLHttpRequest();
-                        } else { // code for IE6, IE5
-                          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-                        }
-                        xmlhttp.onreadystatechange=function() {
-                          if (this.readyState==4 && this.status==200) {
-                            document.getElementById("parentContent").innerHTML=this.responseText;
-                          }
-                        }
-                        xmlhttp.open("GET","parent_iletisim.php?q="+veli_url,true);
-                        xmlhttp.send();
-                      }
-                      </script>
-                    </li>
-                </ul>
-            </nav>
 
-            <!-- Page Content Holder -->
+<!---**********************************************'Ogrenci Durumu' Content Begins ------------------------------------------------------------------------------------------------------------------------->
+
+          <li class="active">
+                <a href="#OgrenciDurumu" data-toggle="collapse" aria-expanded="false">Öğrenci Durumu</a>
+                <script>
+                function showOgrenciDurumu(veli_url) {
+                  if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+                  } else { // code for IE6, IE5
+                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                  }
+                  xmlhttp.onreadystatechange=function() {
+                    if (this.readyState==4 && this.status==200) {
+                      document.getElementById("parentContent").innerHTML=this.responseText;
+                    }
+                  }
+                  xmlhttp.open("GET","parent_evaluation.php?q="+veli_url,true);
+                  xmlhttp.send();
+                }
+                </script>
+                <ul class="collapse list-unstyled" id="OgrenciDurumu">
+                  <?php
+                    $connection = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+                    if ($connection) {
+                        $sql = "SELECT d.ders_adi
+                                FROM Veli AS v, Ogrenci AS o, Sinif_Ders_Programi AS sdp, Ders d
+                                WHERE v.veli_id = $current_parentID AND v.ogrenci_id = o.ogrenci_id AND o.sinif_id = sdp.sinif_id AND o.sube_id = sdp.sube_id AND sdp.ders_id = d.ders_id";
+                        $result = mysqli_query($connection, $sql);
+                        while ($row_log = mysqli_fetch_row($result)) {
+                            $ders_adi = $row_log[0];
+                            ?>
+                            <li><a href="#" onclick="showOgrenciDurumu(<?php echo $current_parentID; ?>)" class="OgrenciDurumu" id="<?php echo $ders_adi; ?>" name="<?php echo $ders_adi; ?>"><?php echo $ders_adi; ?></a></li>
+                            <?php
+                        }
+                    }
+                    mysqli_free_result($result);
+                    mysqli_close($connection);
+                ?>
+                <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+                <script>
+                    $( ".OgrenciDurumu" ).click(function() {
+                      var ders_adi = this.id;
+                      document.cookie = "ders_adi=" + ders_adi + ";";
+                      $("#parentContent").load('parent_evaluation.php');
+                    });
+
+                </script>
+              </ul>
+            </li>
+
+<!---**********************************************'Iletisim' Content Begins ------------------------------------------------------------------------------------------------------------------------->
+
+                          <li>
+                            <a href="#Iletisim" onclick="showIletisim(<?php echo $current_parentID; ?>)">Iletisim</a>
+                            <script>
+                            function showIletisim(veli_url) {
+                              if (window.XMLHttpRequest) {
+                                // code for IE7+, Firefox, Chrome, Opera, Safari
+                                xmlhttp=new XMLHttpRequest();
+                              } else { // code for IE6, IE5
+                                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                              }
+                              xmlhttp.onreadystatechange=function() {
+                                if (this.readyState==4 && this.status==200) {
+                                  document.getElementById("parentContent").innerHTML=this.responseText;
+                                }
+                              }
+                              xmlhttp.open("GET","parent_iletisim.php?q="+veli_url,true);
+                              xmlhttp.send();
+                            }
+                            </script>
+                          </li>
+
+                        </ul>
+                    </nav>
+
+<!---********************************************** Page Content Holder ------------------------------------------------------------------------------------------------------------------------->
+
             <div id="content">
 
                 <nav class="navbar navbar-default">
@@ -244,6 +314,8 @@
 
     </body>
 </html>
+
+<!--********************************************** 'Sifre degistir' modal content ********************************************************************************************************************************-->
 
 <div id='sifre_degistir_Modal' class='modal fade'>
   <div class='modal-dialog'>
