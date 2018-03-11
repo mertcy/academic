@@ -169,3 +169,40 @@ CREATE TABLE Ogrenci_Degerlendirme (
 
 UPDATE `Ders` SET `ders_adi` = 'FenBilgisi' WHERE `Ders`.`ders_id` = 4;
 UPDATE `Ders` SET `ders_adi` = 'BedenEgitimi' WHERE `Ders`.`ders_id` = 7;
+
+
+
+
+ALTER TABLE `ogrenci` ADD `klup` VARCHAR(200) NOT NULL AFTER `sube_id`;
+ALTER TABLE `ogrenci` ADD `klup_icerigi` TEXT NOT NULL AFTER `klup`;
+
+UPDATE `ogrenci` SET `klup` = 'Sivil Savunma Klubu' WHERE `ogrenci`.`ogrenci_id` = 1;
+UPDATE `ogrenci` SET `klup` = 'Kutuphanecilik Klubu' WHERE `ogrenci`.`ogrenci_id` = 4;
+UPDATE `ogrenci` SET `klup` = 'Kultur Ve Edebiyat Klubu' WHERE `ogrenci`.`ogrenci_id` = 5;
+UPDATE `ogrenci` SET `klup` = 'Spor Klubu' WHERE `ogrenci`.`ogrenci_id` = 6;
+UPDATE `ogrenci` SET `klup` = 'Resim Klubu' WHERE `ogrenci`.`ogrenci_id` = 7;
+UPDATE `ogrenci` SET `klup` = 'Kizilay Klubu' WHERE `ogrenci`.`ogrenci_id` = 8;
+UPDATE `ogrenci` SET `klup` = 'Muzik Klubu' WHERE `ogrenci`.`ogrenci_id` = 9;
+UPDATE `ogrenci` SET `klup` = 'Cevre Klubu' WHERE `ogrenci`.`ogrenci_id` = 10;
+UPDATE `ogrenci` SET `klup` = 'Yesilay Klubu' WHERE `ogrenci`.`ogrenci_id` = 11;
+
+UPDATE `ogrenci` SET `klup_icerigi` = 'Sivil Savunma Kolu, meydana gelebilecek herhangi bir dogal afet (yangin, deprem vb.), kimyasal ve biyolojik saldiri, zehirlenme ve bogulma gibi durumlarda olusabilecek zararlari en asgariye indirmek icin gereken onlemleri almak amaciyla kurulmustur. Bu koldaki ogrenciler olusabilecek bu gibi durumlarda aktif bir sekilde gorev almaktadirlar.' WHERE `ogrenci`.`ogrenci_id` = 1;
+
+UPDATE `ogrenci` SET `klup_icerigi` = 'Kitapligin tanitilmasi. Kitaplarin sayimi. Kitaplarin demirbas defterine islenmesi. Kitaplarin turlerine gore tasnifi. Ataturk konulu ozel gun ve haftalarda kitapligin tanitilmasi, on plana cikarilmasi. Kitaplarin ogrencilere tanitilmasi.' WHERE `ogrenci`.`ogrenci_id` = 4;
+
+UPDATE `ogrenci` SET `klup_icerigi` = 'Kultur nedir? Kulturumuz hakkinda bilgilendirmek. Egitici kol calismalarinda ogrencilere, dayanisma ve yardimlasma aliskanligi kazandirmak. Turk Milli Egitiminin amaclarinin dogrultusunda Turk dilini sevdirmek. Kitap okuma aliskanliginin pekistirilmesi. Sanatimizi ve sanatciyi tanitmak..' WHERE `ogrenci`.`ogrenci_id` = 5;
+
+UPDATE `ogrenci` SET `klup_icerigi` = 'Turk Milli Egitiminin genel amaclari dogrultusunda milli ve estetik duygulari kazandirmak. İnsan icin sporun onemini kazandirmak. ogrencilerin bos zamanlarini degerlendirme. Enerjilerini bosa harcamama, iyi davranislara yoneltme. ' WHERE `ogrenci`.`ogrenci_id` = 6;
+
+UPDATE `ogrenci` SET `klup_icerigi` = 'Kizilay nedir? Kizilay’in toplumdaki oneminin vurgulanmasi. Kizilay’in toplumumuza sagladigi faydalar. İlkyardim nedir? Nasil yapilir? Kan bagisinin onemi ve kisiye kazandirdiklari. İnsan yasamini tehlikeye sokacak olan hastaliklarin taninmasi ve bunlardan korunmak. Kent kizilay merkezinin taninmasi' WHERE `ogrenci`.`ogrenci_id` = 8;
+
+UPDATE `ogrenci` SET `klup_icerigi` = 'Resim nedir? Amaclari nelerdir? Resim yapmanin insan yasamindaki onemi nedir? Ataturk’un sanata ve sanatciya verdigi onemi. Yetenekli ogrencilerin ortaya cikmasinda yardimci olmak. Okulu guzellestirme ile ilgili calismalarin, okulu guzellestirme kolu ile birlikte yurutulmesi. ' WHERE `ogrenci`.`ogrenci_id` = 7;
+
+UPDATE `ogrenci` SET `klup_icerigi` = 'ogrencilere okulda ve yasamlarinda is bolumunun yararlarini gostermek ve bu konuda gelismelerine yardimci olmak. Okullarimizda, milli oyunlarimizin, muzigi, giyimi ve figurleri ile yasatilmasina calismak. Okulu tanitmak, sesini duyurmak icin okul geceleri duzenlemek. Yapilan calismalarin sergilenmesi.' WHERE `ogrenci`.`ogrenci_id` = 9;
+
+UPDATE `ogrenci` SET `klup_icerigi` = 'Temizligin insan yasamindaki onemi. Temizligin insana sagladigi yararlar. Temiz ve duzenli olmanin kisiye kazandirdigi yararlar. Okul icindeki temizligin onemli oldugunun kavramasi. Okul bahcesindeki agaclarin korunmasina uygun yerlerin agaclandirilmasi.' WHERE `ogrenci`.`ogrenci_id` = 10;
+
+UPDATE `ogrenci` SET `klup_icerigi` = 'ulkemizdeki Yesilay durumunun ogrencilere aktarilmasi Zararli aliskanliklar hakkinda ogrencilere bilgi vermek Sigara ve alkolun zararlarini anlatan etkinlikler yapmak' WHERE `ogrenci`.`ogrenci_id` = 11;
+
+
+
