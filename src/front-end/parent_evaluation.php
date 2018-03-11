@@ -32,4 +32,43 @@
 ?>
 
 
+
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawVisualization);
+
+      function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+         ['Month', 'Derse Katılım', 'Ders İçi Disiplini', 'Quiz Performans', 'Ödev Titizliği', 'Derse Hazırlığı', 'Arkadaş İletişimi'],
+         ['1.Hafta',  165,      938,         522,             998,           450,      614.6],
+         ['2.Hafta',  135,      1120,        599,             1268,          288,      682],
+         ['3.Hafta',  157,      1167,        587,             807,           397,      623],
+         ['4.Hafta',  139,      1110,        615,             968,           215,      609.4]
+      ]);
+
+    var options = {
+      title : 'Çocuğunuzun haftalık değerlendirme puanları',
+      vAxis: {title: 'Değerlendirme Puanı'},
+      hAxis: {title: 'Şubat'},
+      seriesType: 'bars',
+      series: {6: {type: 'line'}}
+    };
+
+    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+    </script>
+    
+  </head>
+  <body>
+    <div id="chart_div" style="width: 1000px; height: 500px;"></div>
+  </body>
+</html>
+
+
 </html>
