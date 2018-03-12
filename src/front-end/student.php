@@ -220,6 +220,72 @@
                       }
                       </script>
                     </li>
+
+                    <li class="active">
+                      <a href="#Degerlendirme" data-toggle="collapse" aria-expanded="false">Degerlendirme</a>
+                      <script>
+                      function showFeedBack(ogrenci_url) {
+                        if (window.XMLHttpRequest) {
+                          // code for IE7+, Firefox, Chrome, Opera, Safari
+                          xmlhttp=new XMLHttpRequest();
+                        } else { // code for IE6, IE5
+                          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.onreadystatechange=function() {
+                          if (this.readyState==4 && this.status==200) {
+                            document.getElementById("studentContent").innerHTML=this.responseText;
+                          }
+                        }
+                        xmlhttp.open("GET","student_feedback.php?q="+ogrenci_url,true);
+                        xmlhttp.send();
+                      }
+                      </script>
+
+                      <ul class="collapse list-unstyled" id="Degerlendirme">
+                        <?php
+                        $conn = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+                        if($conn){
+                        $query = "SELECT og.sinif_id, og.sube_id
+                                    FROM Ogrenci AS og
+                                    WHERE og.ogrenci_id =  '$current_ogrenciId'";
+                        $sonuc = mysqli_query($conn, $query);
+                        while ($row = mysqli_fetch_row($sonuc)) {
+                            $sinif_id = $row[0];
+                            $sube_id = $row[1];
+                        }
+                      }
+                      mysqli_free_result($sonuc);
+                      mysqli_close($conn);
+                          $connection = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
+                          if ($connection) {
+
+                              $sql = "SELECT d.ders_adi
+                                          FROM Ders As d
+                                          INNER JOIN Sinif_Ders_Programi ON Sinif_Ders_Programi.ders_id = d.ders_id
+                                          WHERE Sinif_Ders_Programi.sinif_id = '$sinif_id' AND Sinif_Ders_Programi.sube_id= '$sube_id'";
+                              $result = mysqli_query($connection, $sql);
+                              while ($row_log = mysqli_fetch_row($result)) {
+                                  $ders_adi = $row_log[0];
+                                  ?>
+                                  <li><a href="#<?php echo $ders_adi; ?>" onclick="showFeedBack(<?php echo $current_ogrenciId; ?>)" class="Degerlendirme" id="<?php echo $ders_adi; ?>" name="<?php echo $ders_adi; ?>"><?php echo $ders_adi; ?></a></li>
+                                  <?php
+                              }
+                          }
+                          mysqli_free_result($result);
+                          mysqli_close($connection);
+                      ?>
+                      <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+                      <script>
+                          $( ".Degerlendirme" ).click(function() {
+                            var ders_adi = this.id;
+                            document.cookie = "ders_adi=" + ders_adi + ";";
+                            $("#studentContent").load('student_feedback.php');
+                          });
+
+                      </script>
+                    </ul>
+
+                    </li>
                 </ul>
 
             </nav>
