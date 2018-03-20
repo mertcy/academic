@@ -101,7 +101,74 @@
       }
       $arkadas *= 200; // $arkadas = 200 * (Arkadas Iliskileri)  seklinde hesaplanir
   }
+  $quizPuani = 1000;
+
+
+  if($dersKatilimPuani == 200 || $dersKatilimPuani == 300)
+    $Degerlendirme = "Bu hafta derse katılma konusunda ciddi sıkıntıları var. Ders anlatılırken ders ile ilgilenmiyor. Ders esnasında sorulan sorulara cevap veremiyor. Bu şekilde devam ederse bu durumu sınav notlarına yansıyacaktır. Derse katılma konusunda uyarılmalı.";
+  if($dersKatilimPuani == 400 || $dersKatilimPuani == 500)
+    $Degerlendirme = "Bu hafta derse katılma konusunda sıkıntı yaşıyor var. Derste biraz daha aktif olmalı ve sorulan sorulara cevap vermede biraz daha gayretli olmalı. Bu şekilde devam ederse bu durumu sınav notlarına yansıyacaktır. Derse katılma konusunda uyarılmalı.";
+  if($dersKatilimPuani == 600 || $dersKatilimPuani == 700)
+    $Degerlendirme = "Bu hafta derse katılma konusunda sıkıntılı olduğu söylenemez. Sorulan sorulara genelde cevap verebiliyor. Fakat biraz daha gayretli olursa çok daha iyisini yapabilir.";
+  if($dersKatilimPuani >= 800)
+    $Degerlendirme = "Bu hafta derse katılma konusunda çok iyiydi. Sorulan sorulara eksiksiz yanıt verdiği söylenebilir. Ders içerisindeki bu gayreti ve başarısı notlarına yansıyacaktır. Aynen bu şekilde devam etmeli.";
+
+
+  if($dersDisiplinPuani == 200)
+    $Degerlendirme = $Degerlendirme. " " ."Ders içerisindeki disiplini ve tutumu oldukça kötü. Dersi sürekli sabote ediyor ve işleyişi bozuyor. Ders içerisindeki bu disiplinsiz tutumları diğer arkadaşlarına da büyük ölçüde zarar veriyor. Bu konuda ciddi şekilde uyarılmalı. Bu şekilde devam ederse sözlü notlarına bu durum yansıyacaktır.";
+  if($dersDisiplinPuani == 400)
+    $Degerlendirme = $Degerlendirme. " " ."Ders içerisindeki disiplini ve tutumunun iyi olduğu söylenemez. Dersi zaman zaman sabote ediyor ve işleyişi bozuyor. Biraz kendine çeki düzen vermeli. Bu sayede dersteki başarısı da artacağına inanıyorum.";
+  if($dersDisiplinPuani == 600)
+    $Degerlendirme = $Degerlendirme. " " ."Ders içerisindeki disiplini ve tutumunundan memnunum fakat nadir de olsa ara sıra disiplinsiz davranışları olabiliyor.";
+  if($dersDisiplinPuani >= 800)
+    $Degerlendirme = $Degerlendirme. " " ."Ders içerisindeki disiplini ve tutumunundan oldukça memnunum. Huzuru bozmayışı dersteki başarısına etki edeceğine inanıyorum. Bu davranışları diğer arkadaşlarına da örnek oluyor.";
+
+
+  if($quizPuani == 200)
+    $Degerlendirme = $Degerlendirme. " " ."Gerek online quiz gerekse derste yaptığım quizlerde puanları çok düşük. Günlük ders çalışmalı ve tekrar yapmalı. Bu şekilde devam ederse sınavlardan yüksek puan alması imkansız gibi gözüküyor. Çok daha gayretli olmalı.";
+  if($quizPuani == 400)
+    $Degerlendirme = $Degerlendirme. " " ."Gerek online quiz gerekse derste yaptığım quizlerde notları pek iç açıcı değil. Günlük olarak dersine çalışmalı ve tekrar yapmalı. Bu konuda gayretini artırmalı.";
+  if($quizPuani == 600)
+    $Degerlendirme = $Degerlendirme. " " ."Gerek online quiz gerekse derste yaptığım quizlerde notları fena değil. Biraz daha gayret ederse sınavlarda da gayet iyi notlar alması mümkün. Gidişatını bozmadan biraz daha gayretli olabilir.";
+  if($quizPuani >= 800)
+    $Degerlendirme = $Degerlendirme. " " ."Gerek online quiz gerekse derste yaptığım quizlerde notları gayet iyi. Bu da günlük tekrar yapıp iyi çalıştığını gösteriyor. Bu gidişatını bozmamalı. Bu şekilde devam ettiği sürece sınavlardan da yüksek not alması muhtemel.";
+
+
+  if($odevPuani == 200)
+    $Degerlendirme = $Degerlendirme. " " ."Verilen hiçbir ödevini yapmıyor. Bu şekilde devam etmesi mümkün değil. Ödevlerini yapmamaya devam ederse sınavlardan yüksek not alması imkansız. Ödev konusunda ciddi uyarılara ihtiyacı var.";
+  if($odevPuani == 400)
+    $Degerlendirme = $Degerlendirme. " " ."Ödevlerini baştan savma yapıyor. Ödev yapma daha titiz olmalı. Ödev konusunda gayretini artırırsa bu durum sınavlarına da yansıyacaktır.";
+  if($odevPuani == 600)
+    $Degerlendirme = $Degerlendirme. " " ."Verilen ödevleri büyük ölçüde yapıyor. Fakat ödev konusunda biraz daha titiz olabilir.";
+  if($odevPuani >= 800)
+    $Degerlendirme = $Degerlendirme. " " ."Verilen ödevleri istenilen şekilde ve büyük bir titizlikle yapıyor. Ödev konusunda çizgisini bozmamalı.";
+
+
+  if($dersHazirligi == 200)
+    $Degerlendirme = $Degerlendirme. " " ."Derslere hiçbir zaman hazırlıklı gelmiyor. Ders araç gereçleri genelde yanında olmuyor. Bu da dersi anlamasını zorlaştırıyor. Bu konuda dikkatli olmalı.";
+  if($dersHazirligi == 400)
+    $Degerlendirme = $Degerlendirme. " " ."Derse hazırlıklı gelme konusunda sıkıntı yaşıyor. ";
+  if($dersHazirligi == 600)
+    $Degerlendirme = $Degerlendirme. " " ."Derse genelde hazırlıklı geliyor.";
+  if($dersHazirligi >= 800)
+    $Degerlendirme = $Degerlendirme. " " ."Derse hazırlıklı gelme konusunda oldukça başarılı.";
+
+
+  if($arkadas == 200)
+    $Degerlendirme = $Degerlendirme. " " ."Arkadaşları ile olan iletişimi oldukça kötü. Agresif ve negatif tavırlar sergiliyor. Bu durum çok ciddi sıkıntılar doğurabilir.";
+  if($arkadas == 400)
+    $Degerlendirme = $Degerlendirme. " " ."Arkadaşları ile olan iletişimi ve ilişkisi konusunda biraz daha iyi niyetli ve pozitif olmalı. ";
+  if($arkadas == 600)
+    $Degerlendirme = $Degerlendirme. " " ."Arkadaşları ile iletişimi ve ilişkisi konusunda bir problemi yok.";
+  if($arkadas >= 800)
+    $Degerlendirme = $Degerlendirme. " " ."Arkadaş ilişkileri ve iletişimi oldukça iyi. Çok pozitif bir çocuk. Arkadaşları tarafından da oldukça seviliyor.";
+
+
 ?>
+
+<br></br>
+<p><b> Şubat ayı 1.hafta değerlendirme yorumları: </b></p>
+<?php echo $Degerlendirme; ?>
 
 <html>
   <head>
@@ -113,7 +180,7 @@
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
          ['Month', 'Derse Katılım', 'Ders İçi Disiplini', 'Quiz Performans', 'Ödev Titizliği', 'Derse Hazırlığı', 'Arkadaş İletişimi'],
-         ['1.Hafta',  <?php echo $dersKatilimPuani; ?>,<?php echo $dersDisiplinPuani; ?>, 1000,<?php echo $odevPuani; ?>,<?php echo $dersHazirligi; ?>,<?php echo $arkadas; ?>],
+         ['1.Hafta',  <?php echo $dersKatilimPuani; ?>,<?php echo $dersDisiplinPuani; ?>, <?php echo $quizPuani; ?>,<?php echo $odevPuani; ?>,<?php echo $dersHazirligi; ?>,<?php echo $arkadas; ?>],
          ['2.Hafta',  135,      120,        599,             268,          288,      682],
          ['3.Hafta',  157,      167,        587,             807,           397,      623],
          ['4.Hafta',  139,      110,        615,             968,           215,      609.4]
