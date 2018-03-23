@@ -44,6 +44,7 @@ th {text-align: left;}
         <div class="line">
         <p>
             <?php
+              $announcement_code = 0;
               INCLUDE('parent_announcementSql.php');
               $sql_log = $sql . $announcement_code . ";";
               $result = mysqli_query($connection, $sql_log);
