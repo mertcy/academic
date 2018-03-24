@@ -133,7 +133,7 @@
                     echo "<script type='text/javascript'>alert('Subeyi yanlis girdiniz. Lutfen tekrar deneyin.');</script>";
                     $control_meeting = 0;
                 }  elseif ($control_meeting == 1) {
-                    $sqlToplanti = "INSERT INTO `Toplanti` (`toplanti_id`, `duyuru_tipi`, `sinif_id`, `sube_id`, `toplanti_tipi`, `toplanti_no`, `toplanti_tarihi`, `katilim_durumu`, `toplanti_baslik`, `toplanti_icerik`) VALUES ('', '', '$toplanti_sinif', '$toplanti_sube', '', '', '$toplanti_tarihi', '', '$toplanti_baslik', '$toplanti_icerik')";
+                    $sqlToplanti = "INSERT INTO `Toplanti` (`toplanti_id`, `duyuru_tipi`, `sinif_id`, `sube_id`, `toplanti_tipi`, `toplanti_no`, `toplanti_tarihi`, `katilim_durumu`, `toplanti_baslik`, `toplanti_icerik`,`ogretmen_id` ) VALUES ('', '', '$toplanti_sinif', '$toplanti_sube', '', '', '$toplanti_tarihi', '', '$toplanti_baslik', '$toplanti_icerik','$current_OgretmenId')";
                     if (mysqli_query($connection_toplanti, $sqlToplanti)) {
                         echo "<script type='text/javascript'>alert('Toplantiniz basariyla $toplanti_sinif-$toplanti_sube sinifina eklenmistir.');</script>";
                     } else {
@@ -165,7 +165,7 @@ if ($connection_gezi) {
             echo "<script type='text/javascript'>alert('Subeyi yanlis girdiniz. Lutfen tekrar deneyin.');</script>";
             $control = 0;
         }  elseif ($control == 1) {
-            $sqlGezi = "INSERT INTO `geziler` (`sinif_id`, `sube_id`, `gezi_basligi`, `gezi_icerigi`, `gezi_tarihi`) VALUES ('$sinif_gezi', '$sube_gezi','$gezi_basligi','$gezi_icerigi','$gezi_tarihi')";
+            $sqlGezi = "INSERT INTO `geziler` (`sinif_id`, `sube_id`, `gezi_basligi`, `gezi_icerigi`, `gezi_tarihi`,`ogretmen_id` ) VALUES ('$sinif_gezi', '$sube_gezi','$gezi_basligi','$gezi_icerigi','$gezi_tarihi','$current_OgretmenId')";
             if (mysqli_query($connection_gezi, $sqlGezi)) {
                 echo "<script type='text/javascript'>alert('Gezi basariyla $sinif_gezi-$sube_gezi sinifina eklenmistir.');</script>";
             } else {
@@ -197,8 +197,8 @@ if (isset($_POST['sendAnnouncement'])) {
   if ($connection_announcement) {
 
     $sql = "INSERT INTO Duyuru (sinif_id, sube_id, ilgili, duyuru_tipi,
-                                duyuru_basligi, duyuru_icerigi, duyuru_tarihi)
-            VALUES ('$sinif', '$sube', '$ilgili', '$duyuru', '$baslik', '$icerik', '$date')";
+                                duyuru_basligi, duyuru_icerigi, duyuru_tarihi, ogretmen_id)
+            VALUES ('$sinif', '$sube', '$ilgili', '$duyuru', '$baslik', '$icerik', '$date', '$current_OgretmenId')";
 
     if (mysqli_query($connection_announcement, $sql)) {
         echo "<script type='text/javascript'>alert('Duyuru başarıyla eklenmiştir.');</script>";

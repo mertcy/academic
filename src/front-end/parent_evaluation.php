@@ -155,7 +155,7 @@
   if($dersKatilimPuani == 200 || $dersKatilimPuani == 300)
     $Degerlendirme = "Bu hafta derse katılma konusunda ciddi sıkıntıları var. Ders anlatılırken ders ile ilgilenmiyor. Ders esnasında sorulan sorulara cevap veremiyor. Bu şekilde devam ederse bu durumu sınav notlarına yansıyacaktır. Derse katılma konusunda uyarılmalı." . "<br>" . PHP_EOL;
   if($dersKatilimPuani == 400 || $dersKatilimPuani == 500)
-    $Degerlendirme = "Bu hafta derse katılma konusunda sıkıntı yaşıyor var. Derste biraz daha aktif olmalı ve sorulan sorulara cevap vermede biraz daha gayretli olmalı. Bu şekilde devam ederse bu durumu sınav notlarına yansıyacaktır. Derse katılma konusunda uyarılmalı." . "<br>" . PHP_EOL;
+    $Degerlendirme = "Bu hafta derse katılma konusunda sıkıntı yaşıyor. Derste biraz daha aktif olmalı ve sorulan sorulara cevap vermede biraz daha gayretli olmalı. Bu şekilde devam ederse bu durumu sınav notlarına yansıyacaktır. Derse katılma konusunda uyarılmalı." . "<br>" . PHP_EOL;
   if($dersKatilimPuani == 600 || $dersKatilimPuani == 700)
     $Degerlendirme = "Bu hafta derse katılma konusunda sıkıntılı olduğu söylenemez. Sorulan sorulara genelde cevap verebiliyor. Fakat biraz daha gayretli olursa çok daha iyisini yapabilir." . "<br>" . PHP_EOL;
   if($dersKatilimPuani >= 800)

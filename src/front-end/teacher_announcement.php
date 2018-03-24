@@ -21,7 +21,13 @@ th {text-align: left;}
 
 <p> Duyuru eklemek için ekleyeceğinizin duyuru tipini seçerek gerekli bilgileri doldurunuz. Duyurunun velinin yanısıra öğrencilere de ulaşmasını istiyorsanız, öğrencinin yanındaki tik işaretini seçin. </p>
 <br></br>
-
+  <?php
+      session_start(); // start the session
+      if ($_SESSION['status']!="Active") {
+          header("location:login.php");
+      }
+      $current_OgretmenId = $_SESSION['user_id'];
+   ?>
 <body>
   <div id="announcementAdd">
     <button name="send_announcement_button" id="send_announcement_button" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#announcement_modal">Duyuru Ekle</button>
@@ -33,7 +39,7 @@ th {text-align: left;}
 <?php
     $connection_toplanti = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
     if($connection_toplanti){
-      $sql_toplanti =  "SELECT d.sinif_id, d.sube_id, d.duyuru_basligi, d.duyuru_tarihi FROM Duyuru AS d";
+      $sql_toplanti =  "SELECT d.sinif_id, d.sube_id, d.duyuru_basligi, d.duyuru_tarihi FROM Duyuru AS d WHERE d.ogretmen_id = $current_OgretmenId";
       $result = mysqli_query($connection_toplanti, $sql_toplanti);
       while($row = mysqli_fetch_row($result)){ ?>
         <p><?php echo $row[3];?> tarihinde <?php echo $row[0]."-".$row[1];?> sınıfı öğrenci ve velilerine '<?php echo $row[2];?>' başlıklı duyuru eklediniz.</p>
@@ -63,7 +69,7 @@ th {text-align: left;}
                     <?php
                       $connection_announcement = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
                       if ($connection_announcement) {
-                        $sql = "SELECT sinif_id FROM Sinif ORDER BY sinif_id ASC;";
+                        $sql = "SELECT distinct sinif_id FROM Sinif ORDER BY sinif_id ASC;";
                         $result = mysqli_query($connection_announcement, $sql);
                         while ($row = mysqli_fetch_row($result)) {
                         ?>
@@ -77,7 +83,7 @@ th {text-align: left;}
                   <label><b>&nbsp;&nbsp;&nbsp;Sube: </b><select id="sube_id" name="sube_id" required>
                       <option value="" disabled selected>--</option>
                       <?php
-                            $sql = "SELECT sube_id FROM Sinif ORDER BY sube_id";
+                            $sql = "SELECT distinct sube_id FROM Sinif ORDER BY sube_id";
                             $result = mysqli_query($connection_announcement, $sql);
                             while ($row = mysqli_fetch_row($result)) {
                               ?>

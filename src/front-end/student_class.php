@@ -69,4 +69,4 @@
 ?>
         <script type="text/javascript" async defer src="https://d134jvmqfdbkyi.cloudfront.net/script/embed.min.js"></script>
         <br></br>
-        ​<iframe width="950" height="450" src= <?php echo "$link"; ?> frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        ​<iframe width="950" height="800" src= <?php echo "$link"; ?> frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>

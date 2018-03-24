@@ -19,7 +19,7 @@
           <?php
             $connection_evaluation = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
             if ($connection_evaluation) {
-              $sql = "SELECT k.kisi_id, k.kisi_adi, k.kisi_soyadi FROM Kisi AS k, Sinif As s, Ogrenci AS o
+              $sql = "SELECT distinct k.kisi_id, k.kisi_adi, k.kisi_soyadi FROM Kisi AS k, Sinif As s, Ogrenci AS o
                       WHERE k.kisi_id = o.ogrenci_id AND s.sinif_id = $sinif_id AND s.sube_id = '$sube_id' AND
                       o.sinif_id = s.sinif_id AND o.sube_id = s.sube_id
                       ORDER BY k.kisi_adi ASC;";

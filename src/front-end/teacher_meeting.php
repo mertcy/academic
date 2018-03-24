@@ -2,6 +2,13 @@
 <html>
 <body>
 
+  <?php
+      session_start(); // start the session
+      if ($_SESSION['status']!="Active") {
+          header("location:login.php");
+      }
+      $current_OgretmenId = $_SESSION['user_id'];
+   ?>
 <h2> Veli toplantısı oluşturma alanı </h2>
 <br></br>
 <p> Veli toplantısı oluşturmak için aşağıdaki 'Toplantı Oluştur' butonunu kullanarak, hangi tarihte hangi sınıf ile nerede toplantıyı yapacağınız bilgilerini girin.</p>
@@ -12,14 +19,14 @@
   <button name="send_toplanti_button" id="send_toplanti_button" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#toplanti_modal">Toplantı Oluştur</button>
 </div>
 <br></br>
-<h4> Mevcut toplantılarınız:</h4>
+<h4> Bu sınıfa eklenmiş olan mevcut toplantılar:</h4>
 <?php
     $connection_toplanti = mysqli_connect('localhost', 'root', 'root', 'db_academic', '8889', '/Applications/MAMP/tmp/mysql/mysql.sock');
     if($connection_toplanti){
-      $sql_toplanti =  "SELECT t.sinif_id, t.sube_id, t.toplanti_baslik, t.toplanti_tarihi FROM Toplanti AS t";
+      $sql_toplanti =  "SELECT t.sinif_id, t.sube_id, t.toplanti_baslik, t.toplanti_tarihi, k.kisi_adi, k.kisi_soyadi FROM Toplanti AS t, Kisi AS k WHERE k.kisi_id = t.ogretmen_id";
       $result = mysqli_query($connection_toplanti, $sql_toplanti);
       while($row = mysqli_fetch_row($result)){ ?>
-        <p><?php echo $row[3];?> tarihinde <?php echo $row[0]."-".$row[1];?> sınıfı ile '<?php echo $row[2];?>' başlıklı toplantınız bulunmaktadır.</p>
+        <p><?php echo $row[3];?> tarihinde <?php echo $row[0]."-".$row[1];?> sınıfı ile '<?php echo $row[2];?>' başlıklı '<?php echo $row[4]." ".$row[5];?>' öğretmenimizin toplantısı bulunmaktadır.</p>
         <?php
       }
       mysqli_free_result($result);
